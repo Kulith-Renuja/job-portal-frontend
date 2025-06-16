@@ -1,0 +1,30 @@
+:root {
+  --primary: #0B669A;
+  --accent: #FDC62C;
+  --light: #f8fafc;
+  --dark: #1e293b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+.hero {
+  background-color: var(--light);
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero h1 {
+  color: var(--primary);
+  font-size: 2.5rem;
+}
+
+.hero p {
+  color: var(--dark);
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
