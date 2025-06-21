@@ -1,5 +1,6 @@
 import './CourseCard.css';
 
+
 export default function CourseCard({ course }) {
   return (
     <div className="course-card">

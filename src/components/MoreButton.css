@@ -1,0 +1,21 @@
+.more-button-container {
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.more-button {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background-color: #fafafa;
+  color: #000000;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  border: 1px solid black;
+}
+
+.more-button:hover {
+  background-color: #c1c0c0;
+}

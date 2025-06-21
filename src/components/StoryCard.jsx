@@ -1,5 +1,6 @@
 import './StoryCard.css';
 
+
 export default function StoryCard({ story }) {
   return (
     <div className="story-card">

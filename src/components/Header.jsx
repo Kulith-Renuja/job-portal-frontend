@@ -4,8 +4,10 @@ import './Header.css';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleMenu = () => setOpen(!open);
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   return (
     <header className="header">
@@ -18,12 +20,24 @@ export default function Header() {
 
         <nav className={`nav-links ${open ? 'active' : ''}`}>
           <Link to="/" onClick={() => setOpen(false)}>Home</Link>
-          <Link to="/categories" onClick={() => setOpen(false)}>Categories</Link>
-          <Link to="/account" onClick={() => setOpen(false)}>Account</Link>
-          <Link to="/about" onClick={() => setOpen(false)}>About</Link>
-          <Link to="/stories" onClick={() => setOpen(false)}>Stories</Link>
+
+          <div className="dropdown" onClick={toggleDropdown}>
+            <span className="dropdown-toggle">Categories ▾</span>
+            {dropdownOpen && (
+              <div className="dropdown-menu">
+                <Link to="/visa" onClick={() => setOpen(false)}>Visa</Link>
+                <Link to="/courses" onClick={() => setOpen(false)}>Courses</Link>
+                <Link to="/stories" onClick={() => setOpen(false)}>Stories</Link>
+                <Link to="/tips" onClick={() => setOpen(false)}>Tips</Link>
+              </div>
+            )}
+          </div>
+
           <Link to="/jobs" onClick={() => setOpen(false)}>Jobs</Link>
+          <Link to="/stories" onClick={() => setOpen(false)}>Migration</Link>
           <Link to="/courses" onClick={() => setOpen(false)}>Courses</Link>
+          <Link to="/about" onClick={() => setOpen(false)}>About</Link>
+          <Link to="/account" onClick={() => setOpen(false)}>Profile</Link>
         </nav>
       </div>
     </header>

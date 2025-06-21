@@ -5,6 +5,8 @@ import CourseCard from '../components/CourseCard';
 import firstImg from '../assets/stories/1.jpg';
 import scondImg from '../assets/stories/2.jpg';
 import thirdImg from '../assets/stories/3.jpg';
+import MoreButton from '../components/MoreButton';
+
 
 
 
@@ -15,26 +17,23 @@ export default function Home() {
       title: 'Frontend Developer',
       company: 'TechNova',
       location: 'Colombo, Sri Lanka',
-      salary: 85000
     },
     {
       title: 'Marketing Specialist',
       company: 'BrightAds',
       location: 'Remote',
-      salary: 75000
     },
     {
       title: 'UI/UX Designer',
       company: 'Designify',
       location: 'Galle',
-      salary: 68000
     }
   ];
 
   return (
     <div className="home-page">
       <section className="hero">
-        <h1>Find Your Dream Job</h1>
+        <h1>ජීවිතේම ගොඩයන්න</h1>
         <p>Explore top categories, jobs, stories and more.</p>
         <div className="search-bar">
           <input
@@ -49,39 +48,17 @@ export default function Home() {
       <Categories />
 
       <section className="job-listings">
-        <h2 className="section-title">Latest Jobs</h2>
+        <h2 className="section-title">ගොඩයන Jobs</h2>
         <div className="job-grid">
           {jobs.map((job, index) => (
             <JobCard key={index} job={job} />
           ))}
         </div>
+        <MoreButton to="/jobs" />
       </section>
-      <section className="stories">
-        <h2 className="section-title">Career Stories</h2>
-        <div className="stories-grid">
-            {[
-            {
-                title: 'How I Landed My First Tech Job',
-                description: 'Step-by-step journey from student to software developer.',
-                image: firstImg
-            },
-            {
-                title: 'Top Resume Tips for 2025',
-                description: 'What hiring managers want to see (and what they don’t).',
-                image: scondImg
-            },
-            {
-                title: 'How to Work Remotely',
-                description: 'Practical advice to stay productive and balanced.',
-                image: thirdImg
-            }
-            ].map((story, index) => (
-            <StoryCard key={index} story={story} />
-            ))}
-        </div>
-        </section>
+
         <section className="courses">
-            <h2 className="section-title">Career Development Courses</h2>
+            <h2 className="section-title">ගොඩයන Courses</h2>
             <div className="courses-grid">
                 {[
                 {
@@ -103,9 +80,33 @@ export default function Home() {
                 <CourseCard key={index} course={course} />
                 ))}
             </div>
+            <MoreButton to="/courses" />
             </section>
-
-
+            <section className="stories">
+              <h2 className="section-title">ගොඩයන  Stories</h2>
+              <div className="stories-grid">
+                  {[
+                  {
+                      title: 'How I Landed My First Tech Job',
+                      description: 'Step-by-step journey from student to software developer.',
+                      image: firstImg
+                  },
+                  {
+                      title: 'Top Resume Tips for 2025',
+                      description: 'What hiring managers want to see (and what they don’t).',
+                      image: scondImg
+                  },
+                  {
+                      title: 'How to Work Remotely',
+                      description: 'Practical advice to stay productive and balanced.',
+                      image: thirdImg
+                  }
+                  ].map((story, index) => (
+                  <StoryCard key={index} story={story} />
+                  ))}
+              </div>
+              <MoreButton to="/stories" />
+              </section>
     </div>
   );
 }
