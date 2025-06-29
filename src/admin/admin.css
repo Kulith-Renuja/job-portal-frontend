@@ -1,0 +1,16 @@
+.admin-layout {
+  display: flex;
+}
+
+.admin-content {
+  margin-left: 60px; /* default collapsed sidebar */
+  padding: 2rem;
+  width: 100%;
+  background: #f9f9f9;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.admin-sidebar:hover ~ .admin-content {
+  margin-left: 220px;
+}

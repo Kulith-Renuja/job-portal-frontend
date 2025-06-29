@@ -1,0 +1,61 @@
+.admin-sidebar {
+  width: 60px;
+  background-color: #0B669A;
+  color: white;
+  height: 100vh;
+  padding: 1.5rem 0.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+  z-index: 1000;
+}
+
+.admin-sidebar:hover {
+  width: 220px;
+  padding: 1.5rem;
+}
+
+.admin-logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.admin-sidebar:hover .admin-logo {
+  opacity: 1;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-nav a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.admin-sidebar:hover .admin-nav a {
+  opacity: 1;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+  background-color: #084f77;
+}

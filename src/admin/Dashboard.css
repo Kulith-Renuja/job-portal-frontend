@@ -1,0 +1,47 @@
+.dashboard {
+  padding: 2rem;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0B669A;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard-card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px);
+}
+
+.dashboard-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-card-title.jobs {
+  color: #FDC62C;
+}
+.dashboard-card-title.users {
+  color: #FDC62C;
+}
+.dashboard-card-title.courses {
+  color: #FDC62C;
+}
+.dashboard-card-title.migrations {
+  color: #FDC62C;
+}

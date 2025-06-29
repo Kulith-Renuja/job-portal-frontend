@@ -1,0 +1,70 @@
+.manage-stories {
+  padding: 2rem;
+}
+
+.manage-title {
+  font-size: 1.8rem;
+  color: #0B669A;
+  margin-bottom: 1rem;
+}
+
+.story-list {
+  margin-bottom: 2rem;
+}
+
+.story-row {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.story-actions button {
+  margin-left: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  background-color: #0B669A;
+  cursor: pointer;
+}
+
+.story-actions .delete {
+  background-color: #e53935;
+}
+
+.story-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 700px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+
+.story-form h2 {
+  margin-bottom: 1rem;
+  color: #0B669A;
+}
+
+.story-form input,
+.story-form textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.submit-btn {
+  background: #0B669A;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
