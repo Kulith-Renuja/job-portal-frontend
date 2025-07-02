@@ -1,6 +1,6 @@
 .categories {
   padding: 3rem 2rem;
-  background-color: hwb(0 100% 0%);
+  background: linear-gradient(to left,#beeefe,#ffffff);
 }
 
 .section-title {
