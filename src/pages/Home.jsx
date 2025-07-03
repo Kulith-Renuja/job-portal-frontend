@@ -6,7 +6,7 @@ import firstImg from '../assets/stories/1.jpg';
 import scondImg from '../assets/stories/2.jpg';
 import thirdImg from '../assets/stories/3.jpg';
 import MoreButton from '../components/MoreButton';
-
+import CountriesSection from '../components/CountriesSection';
 
 
 
@@ -46,6 +46,7 @@ export default function Home() {
       </section>
 
       <Categories />
+      <CountriesSection />
 
       <section className="job-listings">
         <h2 className="section-title">ගොඩයන Jobs</h2>
