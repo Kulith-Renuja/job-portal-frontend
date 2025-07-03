@@ -13,7 +13,9 @@ return (
 <Link to="/admin/courses" className={pathname.includes('courses') ? 'active' : ''}>Manage Courses</Link>
 <Link to="/admin/migrations" className={pathname.includes('migrations') ? 'active' : ''}>Manage Migrations</Link>
 <Link to="/admin/stories" className={pathname.includes('stories') ? 'active' : ''}>Manage Stories</Link>
+<Link to="/admin/countries" className={pathname.includes('countries') ? 'active' : ''}>Manage Countries</Link>
 <Link to="/admin/users" className={pathname.includes('users') ? 'active' : ''}>Manage Users</Link>
+
 
 </nav>
 </aside>

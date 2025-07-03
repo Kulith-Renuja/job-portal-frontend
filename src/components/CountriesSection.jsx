@@ -4,6 +4,7 @@ import australia from '../assets/flags/australia.jpg';
 import canada from '../assets/flags/canada.jpg';
 import germany from '../assets/flags/germany.jpg';
 import dubai from '../assets/flags/dubai.jpg';
+import US from '../assets/flags/us.jpg';
 
 
 const countries = [
@@ -11,7 +12,7 @@ const countries = [
   { name: 'Canada', flag: canada },
   { name: 'Germany', flag: germany },
   { name: 'Dubai', flag: dubai },
-    { name: 'United States', flag: 'https://flagcdn.com/us.svg' },
+  { name: 'United States', flag: US },
 ];
 
 export default function CountriesSection() {

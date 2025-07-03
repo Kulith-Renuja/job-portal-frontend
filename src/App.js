@@ -24,6 +24,7 @@ import ManageCourses from './admin/ManageCourses';
 import ManageMigrations from './admin/ManageMigrations';
 import ManageStories from './admin/ManageStories';
 import ManageUsers from './admin/ManageUsers';
+import ManageCountries from './admin/ManageCountries';
 
 function AppLayout() {
   const location = useLocation();
@@ -89,6 +90,14 @@ function AppLayout() {
           element={
             <AdminLayout>
               <ManageUsers />
+            </AdminLayout>
+          }
+        />
+        <Route
+          path="/admin/countries"
+          element={
+            <AdminLayout>
+              <ManageCountries />
             </AdminLayout>
           }
         />
