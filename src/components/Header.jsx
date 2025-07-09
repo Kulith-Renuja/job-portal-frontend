@@ -28,6 +28,7 @@ export default function Header() {
                 <Link to="/migration" onClick={() => setOpen(false)}>Migration</Link>
                 <Link to="/stories" onClick={() => setOpen(false)}>Stories</Link>
                 <Link to="/tips" onClick={() => setOpen(false)}>Tips</Link>
+                 <Link to="/countries" onClick={() => setOpen(false)}>Countries</Link>
               </div>
             )}
           </div>
