@@ -26,6 +26,10 @@ import ManageStories from './admin/ManageStories';
 import ManageUsers from './admin/ManageUsers';
 import ManageCountries from './admin/ManageCountries';
 
+// Auth Protection Components
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
+
 function AppLayout() {
   const location = useLocation();
   const hideLayout = location.pathname === '/auth' || location.pathname.startsWith('/admin');
@@ -34,71 +38,147 @@ function AppLayout() {
     <>
       {!hideLayout && <Header />}
       <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/stories" element={<Stories />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/auth" element={<Auth />} />
+      {/* Public Routes */}
+      <Route path="/auth" element={<Auth />} />
 
-        {/* Admin Routes */}
+      {/* Protected User Route */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+      path="/categories"
+      element={
+      <ProtectedRoute>
+      <Categories />
+      </ProtectedRoute>
+      }
+      />
+      <Route
+      path="/jobs"
+      element={
+      <ProtectedRoute>
+      <Jobs />
+      </ProtectedRoute>
+      }
+      />
+      <Route
+      path="/stories"
+      element={
+      <ProtectedRoute>
+      <Stories />
+      </ProtectedRoute>
+      }
+      />
+      <Route
+      path="/courses"
+      element={
+      <ProtectedRoute>
+      <Courses />
+      </ProtectedRoute>
+      }
+      />
+      <Route
+      path="/about"
+      element={
+      <ProtectedRoute>
+      <About />
+      </ProtectedRoute>
+      }
+      />
+      <Route
+      path="/account"
+      element={
+      <ProtectedRoute>
+      <Account />
+      </ProtectedRoute>
+      }
+      />
+      
+
+          
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Admin Routes (protected) */}
         <Route
           path="/admin/dashboard"
           element={
-            <AdminLayout>
-              <Dashboard />
-            </AdminLayout>
+            <AdminRoute>
+              <AdminLayout>
+                <Dashboard />
+              </AdminLayout>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/jobs"
           element={
-            <AdminLayout>
-              <ManageJobs />
-            </AdminLayout>
+            <AdminRoute>
+              <AdminLayout>
+                <ManageJobs />
+              </AdminLayout>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/courses"
           element={
-            <AdminLayout>
-              <ManageCourses />
-            </AdminLayout>
+            <AdminRoute>
+              <AdminLayout>
+                <ManageCourses />
+              </AdminLayout>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/migrations"
           element={
-            <AdminLayout>
-              <ManageMigrations />
-            </AdminLayout>
+            <AdminRoute>
+              <AdminLayout>
+                <ManageMigrations />
+              </AdminLayout>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/stories"
           element={
-            <AdminLayout>
-              <ManageStories />
-            </AdminLayout>
+            <AdminRoute>
+              <AdminLayout>
+                <ManageStories />
+              </AdminLayout>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/users"
           element={
-            <AdminLayout>
-              <ManageUsers />
-            </AdminLayout>
+            <AdminRoute>
+              <AdminLayout>
+                <ManageUsers />
+              </AdminLayout>
+            </AdminRoute>
           }
         />
         <Route
           path="/admin/countries"
           element={
-            <AdminLayout>
-              <ManageCountries />
-            </AdminLayout>
+            <AdminRoute>
+              <AdminLayout>
+                <ManageCountries />
+              </AdminLayout>
+            </AdminRoute>
           }
         />
       </Routes>

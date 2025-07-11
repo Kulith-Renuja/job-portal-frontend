@@ -1,9 +1,83 @@
 import { useState } from 'react';
 import './Auth.css';
-import logo from '../assets/login-logo.png'; // add your own image or placeholder
+import logo from '../assets/login-logo.png';
+import { loginUser, registerUser } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
+  const [loginPhone, setLoginPhone] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [registerName, setRegisterName] = useState('');
+  const [registerPhone, setRegisterPhone] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+  const [registerConfirm, setRegisterConfirm] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  // 🔐 Handle Login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      const res = await loginUser({
+        phone: loginPhone,
+        password: loginPassword,
+      });
+
+      const { token, ...user } = res.data;
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      if (user.role === 'admin') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/');
+      }
+
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 📝 Handle Register
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    if (registerPassword !== registerConfirm) {
+      setError("Passwords don't match");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await registerUser({
+        name: registerName,
+        email: registerEmail,
+        phone: registerPhone,
+        password: registerPassword,
+      });
+
+      // Save to localStorage
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', JSON.stringify(res.data));
+
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="auth-container">
@@ -26,30 +100,75 @@ export default function Auth() {
           <button onClick={() => setIsLogin(false)} className={!isLogin ? 'active' : ''}>Register</button>
         </div>
 
+        {error && <p className="error-text">{error}</p>}
         {isLogin ? (
-          <form className="auth-form">
+          <form className="auth-form" onSubmit={handleLogin}>
             <h3>Welcome Back</h3>
             <p>Sign in to your account to continue</p>
-            <input type="email" placeholder="Email address" />
-            <input type="password" placeholder="Password" />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              value={loginPhone}
+              onChange={(e) => setLoginPhone(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              required
+            />
             <div className="form-options">
               <label><input type="checkbox" /> Remember me</label>
               <a href="#">Forgot Password?</a>
             </div>
-            <button className="primary-btn">Sign In</button>
-            <div className="divider">Or continue with</div>
-            <button className="google-btn">Continue with Google</button>
+            <button className="primary-btn" disabled={loading}>
+              {loading ? 'Signing in...' : 'Sign In'}
+            </button>
           </form>
         ) : (
-          <form className="auth-form">
+          <form className="auth-form" onSubmit={handleRegister}>
             <h3>Create Account</h3>
             <p>Sign up to get started</p>
-            <input type="text" placeholder="Full Name" />
-            <input type="text" placeholder="Phone Number" />
-            <input type="email" placeholder="Email address" />
-            <input type="password" placeholder="Password" />
-            <input type="password" placeholder="Confirm Password" />
-            <button className="primary-btn">Register</button>
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={registerName}
+              onChange={(e) => setRegisterName(e.target.value)}
+              required
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              value={registerPhone}
+              onChange={(e) => setRegisterPhone(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email address"
+              value={registerEmail}
+              onChange={(e) => setRegisterEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={registerPassword}
+              onChange={(e) => setRegisterPassword(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={registerConfirm}
+              onChange={(e) => setRegisterConfirm(e.target.value)}
+              required
+            />
+            <button className="primary-btn" disabled={loading}>
+              {loading ? 'Registering...' : 'Register'}
+            </button>
           </form>
         )}
       </div>
