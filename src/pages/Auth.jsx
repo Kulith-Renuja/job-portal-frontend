@@ -3,6 +3,7 @@ import './Auth.css';
 import logo from '../assets/login-logo.png';
 import { loginUser, registerUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
@@ -17,6 +18,7 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { login } = useAuth(); 
 
   // 🔐 Handle Login
   const handleLogin = async (e) => {
@@ -25,21 +27,14 @@ export default function Auth() {
     setLoading(true);
 
     try {
-      const res = await loginUser({
-        phone: loginPhone,
-        password: loginPassword,
-      });
+    const res = await loginUser({ phone: loginPhone, password: loginPassword });
+    const { token, ...user } = res.data;
 
-      const { token, ...user } = res.data;
+    // ✅ Update context + localStorage
+    login(token, user);
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+    navigate(user.role === 'admin' ? '/admin/dashboard' : '/');
 
-      if (user.role === 'admin') {
-        navigate('/admin/dashboard');
-      } else {
-        navigate('/');
-      }
 
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
@@ -61,17 +56,19 @@ export default function Auth() {
     setLoading(true);
     try {
       const res = await registerUser({
-        name: registerName,
-        email: registerEmail,
-        phone: registerPhone,
-        password: registerPassword,
-      });
+      name: registerName,
+      email: registerEmail,
+      phone: registerPhone,
+      password: registerPassword,
+    });
 
-      // Save to localStorage
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', JSON.stringify(res.data));
+    const { token, ...user } = res.data;
 
-      navigate('/');
+    // ✅ Update context
+    login(token, user);
+
+    navigate(user.role === 'admin' ? '/admin/dashboard' : '/');
+
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {

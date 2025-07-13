@@ -99,17 +99,6 @@ function AppLayout() {
       }
       />
       
-
-          
-        <Route
-          path="/account"
-          element={
-            <ProtectedRoute>
-              <Account />
-            </ProtectedRoute>
-          }
-        />
-
         {/* Admin Routes (protected) */}
         <Route
           path="/admin/dashboard"
@@ -181,6 +170,13 @@ function AppLayout() {
             </AdminRoute>
           }
         />
+        <Route path="/admin/Account" element={
+            <AdminLayout>
+              <Account />
+            </AdminLayout>
+          }
+        />
+              
       </Routes>
       {!hideLayout && <Footer />}
     </>
