@@ -1,65 +1,86 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import {
+  fetchStories,
+  createStory,
+  updateStory,
+  deleteStory
+} from '../services/storyService';
 import './ManageStories.css';
 
 export default function ManageStories() {
-  const [stories, setStories] = useState([
-    {
-      id: 1,
-      title: 'From Intern to Engineer',
-      image: null,
-      content: 'I started as an intern and got promoted to a full-time developer...',
-    },
-    {
-      id: 2,
-      title: 'My First Remote Job',
-      image: null,
-      content: 'Getting hired remotely changed my life and work style...',
-    }
-  ]);
+  const [stories, setStories] = useState([]);
+  const [form, setForm] = useState({ title: '', image: null, content: '' });
+  const [editingId, setEditingId] = useState(null);
 
-  const [form, setForm] = useState({
-    title: '',
-    image: null,
-    content: ''
-  });
+  useEffect(() => {
+    loadStories();
+  }, []);
+
+  const loadStories = async () => {
+    try {
+      const res = await fetchStories();
+      const sorted = [...res.data].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setStories(sorted);
+    } catch (err) {
+      console.error('Error loading stories:', err);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setForm({ ...form, [name]: files ? files[0] : value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newStory = {
-      ...form,
-      id: Date.now()
-    };
-    setStories([...stories, newStory]);
-    setForm({ title: '', image: null, content: '' });
+
+    try {
+      const payload = new FormData();
+      payload.append('title', form.title);
+      payload.append('content', form.content);
+      if (form.image) payload.append('image', form.image);
+
+      if (editingId) {
+        await updateStory(editingId, payload);
+      } else {
+        await createStory(payload);
+      }
+
+      setForm({ title: '', image: null, content: '' });
+      setEditingId(null);
+      loadStories();
+    } catch (err) {
+      console.error('Submit error:', err);
+    }
   };
 
-  const handleDelete = (id) => {
-    setStories(stories.filter(s => s.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      await deleteStory(id);
+      loadStories();
+    } catch (err) {
+      console.error('Delete error:', err);
+    }
+  };
+
+  const handleEdit = (story) => {
+    setForm({ title: story.title, image: null, content: story.content });
+    setEditingId(story._id);
+  };
+
+  const cancelEdit = () => {
+    setForm({ title: '', image: null, content: '' });
+    setEditingId(null);
   };
 
   return (
     <div className="manage-stories">
       <h1 className="manage-title">Manage Stories</h1>
 
-      <div className="story-list">
-        {stories.map(story => (
-          <div key={story.id} className="story-row">
-            <span>{story.title}</span>
-            <div className="story-actions">
-              <button>Edit</button>
-              <button className="delete" onClick={() => handleDelete(story.id)}>Delete</button>
-            </div>
-          </div>
-        ))}
-      </div>
-
       <form className="story-form" onSubmit={handleSubmit}>
-        <h2>Add New Story</h2>
+        <h2>{editingId ? 'Edit Story' : 'Add New Story'}</h2>
         <input
           type="text"
           name="title"
@@ -68,11 +89,7 @@ export default function ManageStories() {
           onChange={handleChange}
           required
         />
-        <input
-          type="file"
-          name="image"
-          onChange={handleChange}
-        />
+        <input type="file" name="image" onChange={handleChange} />
         <textarea
           name="content"
           placeholder="Story Content"
@@ -81,8 +98,30 @@ export default function ManageStories() {
           onChange={handleChange}
           required
         />
-        <button type="submit" className="submit-btn">Add Story</button>
+        <button type="submit" className="submit-btn">
+          {editingId ? 'Update Story' : 'Add Story'}
+        </button>
+        {editingId && (
+          <button type="button" onClick={cancelEdit} className="cancel-btn">
+            Cancel
+          </button>
+        )}
       </form>
+
+      <div className="story-list">
+        {stories.map((story) => (
+          <div key={story._id} className="story-row">
+            <span>{story.title}</span>
+            <div className="story-actions">
+              <button onClick={() => handleEdit(story)}>Edit</button>
+              <button className="delete" onClick={() => handleDelete(story._id)}>
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }
