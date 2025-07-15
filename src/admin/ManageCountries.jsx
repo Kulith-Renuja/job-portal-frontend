@@ -1,37 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  fetchCountries,
+  createCountry,
+  updateCountry,
+  deleteCountry,
+} from '../services/countryService';
 import './ManageCountries.css';
 
 export default function ManageCountries() {
-  const [countries, setCountries] = useState([
-    {
-      id: 1,
-      title: 'Australia',
-      image: null,
-      subtitles: [
-        { title: 'Migration Pathways', content: 'Skilled visa, student visa options...' },
-        { title: 'Living Costs', content: 'Average monthly living cost is around...' },
-      ]
-    },
-    {
-      id: 2,
-      title: 'Canada',
-      image: null,
-      subtitles: [
-        { title: 'PR Process', content: 'Express Entry & Provincial Nominee Programs...' },
-        { title: 'Job Market', content: 'In-demand IT, healthcare, and trade skills...' },
-      ]
-    }
-  ]);
-
+  const [countries, setCountries] = useState([]);
   const [form, setForm] = useState({
     title: '',
     image: null,
-    subtitles: [{ title: '', content: '' }]
+    subtitles: [{ title: '', content: '' }],
   });
+  const [editingId, setEditingId] = useState(null);
+
+  useEffect(() => {
+    loadCountries();
+  }, []);
+
+  const loadCountries = async () => {
+    try {
+      const res = await fetchCountries();
+      const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setCountries(sorted);
+    } catch (err) {
+      console.error('Failed to fetch countries:', err);
+    }
+  };
 
   const handleChange = (e, index = null, field = null) => {
     const { name, value, files } = e.target;
-
     if (name === 'image') {
       setForm({ ...form, image: files[0] });
     } else if (name === 'subtitle' || name === 'content') {
@@ -47,38 +47,51 @@ export default function ManageCountries() {
     setForm({ ...form, subtitles: [...form.subtitles, { title: '', content: '' }] });
   };
 
-  const handleDelete = (id) => {
-    setCountries(countries.filter((c) => c.id !== id));
+  const handleEdit = (country) => {
+    setEditingId(country._id);
+    setForm({
+      title: country.title,
+      image: null,
+      subtitles: country.subtitles.map((s) => ({ title: s.title, content: s.content })),
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleDelete = async (id) => {
+    try {
+      await deleteCountry(id);
+      setCountries(countries.filter((c) => c._id !== id));
+    } catch (err) {
+      console.error('Delete failed:', err);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newCountry = {
-      ...form,
-      id: Date.now()
-    };
-    setCountries([...countries, newCountry]);
-    setForm({ title: '', image: null, subtitles: [{ title: '', content: '' }] });
+    const data = new FormData();
+    data.append('title', form.title);
+    if (form.image) data.append('image', form.image);
+    data.append('subtitles', JSON.stringify(form.subtitles));
+
+    try {
+      if (editingId) {
+        await updateCountry(editingId, data);
+      } else {
+        await createCountry(data);
+      }
+      setForm({ title: '', image: null, subtitles: [{ title: '', content: '' }] });
+      setEditingId(null);
+      loadCountries();
+    } catch (err) {
+      console.error('Submit failed:', err);
+    }
   };
 
   return (
     <div className="manage-countries">
       <h1 className="manage-title">Manage Countries</h1>
 
-      <div className="country-list">
-        {countries.map((country) => (
-          <div key={country.id} className="country-row">
-            <span>{country.title}</span>
-            <div className="country-actions">
-              <button>Edit</button>
-              <button className="delete" onClick={() => handleDelete(country.id)}>Delete</button>
-            </div>
-          </div>
-        ))}
-      </div>
-
       <form className="country-form" onSubmit={handleSubmit}>
-        <h2>Add New Country</h2>
+        <h2>{editingId ? 'Edit Country' : 'Add New Country'}</h2>
         <input
           type="text"
           name="title"
@@ -87,11 +100,7 @@ export default function ManageCountries() {
           onChange={handleChange}
           required
         />
-        <input
-          type="file"
-          name="image"
-          onChange={handleChange}
-        />
+        <input type="file" name="image" onChange={handleChange} />
 
         <h3>Subtitles & Content</h3>
         {form.subtitles.map((sub, index) => (
@@ -114,10 +123,42 @@ export default function ManageCountries() {
           </div>
         ))}
 
-        <button type="button" onClick={addSubtitle} className="add-subtitle">+ Add Subtitle</button>
+        <button type="button" onClick={addSubtitle} className="add-subtitle">
+          + Add Subtitle
+        </button>
 
-        <button type="submit" className="submit-btn">Add Country</button>
+        <button type="submit" className="submit-btn">
+          {editingId ? 'Update Country' : 'Add Country'}
+        </button>
+
+        {editingId && (
+          <button
+            type="button"
+            onClick={() => {
+              setEditingId(null);
+              setForm({ title: '', image: null, subtitles: [{ title: '', content: '' }] });
+            }}
+            className="cancel-btn "
+          >
+            Cancel
+          </button>
+        )}
+
       </form>
+
+      <div className="country-list">
+        {countries.map((country) => (
+          <div key={country._id} className="country-row">
+            <span>{country.title}</span>
+            <div className="country-actions">
+              <button onClick={() => handleEdit(country)}>Edit</button>
+              <button className="delete" onClick={() => handleDelete(country._id)}>Delete</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      
     </div>
   );
 }
