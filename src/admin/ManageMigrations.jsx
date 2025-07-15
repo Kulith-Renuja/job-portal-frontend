@@ -1,28 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  fetchMigrations,
+  createMigration,
+  deleteMigration,
+  updateMigration,
+} from '../services/migrationService';
 import './ManageMigrations.css';
 
 export default function ManageMigrations() {
-  const [migrations, setMigrations] = useState([
-    {
-      id: 1,
-      title: 'Canada Skilled Worker Pathway',
-      image: null,
-      subtitles: [
-        { title: 'Eligibility', content: 'Requirements for applicants' },
-        { title: 'Documents', content: 'List of required documents' },
-      ],
-    }
-  ]);
-
+  const [migrations, setMigrations] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [form, setForm] = useState({
     title: '',
-    image: null,
+    image: '',
     subtitles: [{ title: '', content: '' }],
   });
+  const [editingId, setEditingId] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      const res = await fetchMigrations();
+      const sorted = res.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setMigrations(sorted);
+    };
+    load();
+  }, []);
 
   const handleChange = (e, index = null, field = null) => {
     const { name, value, files } = e.target;
-
     if (name === 'image') {
       setForm({ ...form, image: files[0] });
     } else if (name === 'subtitle' || name === 'content') {
@@ -34,42 +41,60 @@ export default function ManageMigrations() {
     }
   };
 
-  const addSubtitle = () => {
-    setForm({ ...form, subtitles: [...form.subtitles, { title: '', content: '' }] });
-  };
-
-  const handleDelete = (id) => {
-    setMigrations(migrations.filter((m) => m.id !== id));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newMigration = {
-      ...form,
-      id: Date.now(),
+
+    const payload = {
+      title: form.title,
+      image: form.image,
+      subtitles: form.subtitles,
     };
-    setMigrations([...migrations, newMigration]);
-    setForm({ title: '', image: null, subtitles: [{ title: '', content: '' }] });
+
+    if (editingId) {
+      const res = await updateMigration(editingId, payload);
+      setMigrations((prev) =>
+        prev.map((m) => (m._id === editingId ? res.data : m))
+      );
+    } else {
+      const res = await createMigration(payload);
+      setMigrations([res.data, ...migrations]);
+    }
+
+    setForm({ title: '', image: '', subtitles: [{ title: '', content: '' }] });
+    setEditingId(null);
   };
+
+  const handleEdit = (migration) => {
+    setForm({
+      title: migration.title,
+      image: migration.image,
+      subtitles: migration.subtitles,
+    });
+    setEditingId(migration._id);
+  };
+
+  const handleDelete = async (id) => {
+    await deleteMigration(id);
+    setMigrations(migrations.filter((m) => m._id !== id));
+  };
+
+  const addSubtitle = () => {
+    setForm({
+      ...form,
+      subtitles: [...form.subtitles, { title: '', content: '' }],
+    });
+  };
+
+  const filtered = migrations.filter((m) =>
+    m.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="manage-migrations">
       <h1 className="manage-title">Manage Migrations</h1>
 
-      <div className="migration-list">
-        {migrations.map((migration) => (
-          <div key={migration.id} className="migration-row">
-            <span>{migration.title}</span>
-            <div className="migration-actions">
-              <button>Edit</button>
-              <button className="delete" onClick={() => handleDelete(migration.id)}>Delete</button>
-            </div>
-          </div>
-        ))}
-      </div>
-
       <form className="migration-form" onSubmit={handleSubmit}>
-        <h2>Add New Migration Article</h2>
+        <h2>{editingId ? 'Edit Migration' : 'Add New Migration Article'}</h2>
         <input
           type="text"
           name="title"
@@ -78,11 +103,7 @@ export default function ManageMigrations() {
           onChange={handleChange}
           required
         />
-        <input
-          type="file"
-          name="image"
-          onChange={handleChange}
-        />
+        <input type="file" name="image" onChange={handleChange} />
 
         <h3>Subtitles & Content</h3>
         {form.subtitles.map((sub, index) => (
@@ -105,10 +126,49 @@ export default function ManageMigrations() {
           </div>
         ))}
 
-        <button type="button" onClick={addSubtitle} className="add-subtitle">+ Add Subtitle</button>
-
-        <button type="submit" className="submit-btn">Add Migration</button>
+        <button type="button" onClick={addSubtitle} className="add-subtitle">
+          + Add Subtitle
+        </button>
+        <button type="submit" className="submit-btn">
+          {editingId ? 'Update Migration' : 'Add Migration'}
+        </button>
+        {editingId && (
+          <button
+            type="button"
+            onClick={() => {
+              setEditingId(null);
+              setForm({ title: '', image: '', subtitles: [{ title: '', content: '' }] });
+            }}
+            className="cancel-btn"
+          >
+            Cancel
+          </button>
+        )}
       </form>
+
+      <input
+        type="text"
+        className="search-input"
+        placeholder="Search migrations..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      <div className="migration-list">
+        {filtered.map((m) => (
+          <div key={m._id} className="migration-row">
+            <span>{m.title}</span>
+            <div className="migration-actions">
+              <button onClick={() => handleEdit(m)}>Edit</button>
+              <button onClick={() => handleDelete(m._id)} className="delete">
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      
     </div>
   );
 }

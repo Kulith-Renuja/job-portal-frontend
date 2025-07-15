@@ -68,3 +68,13 @@
   border: none;
   cursor: pointer;
 }
+
+.cancel-btn{
+margin-left: 0.5rem;
+padding: 0.4rem 1rem;
+border-radius: 6px;
+border: none;
+color: white;
+background-color: #0B669A;
+cursor: pointer;
+}
