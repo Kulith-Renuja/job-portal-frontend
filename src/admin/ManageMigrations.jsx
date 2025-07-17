@@ -5,6 +5,7 @@ import {
   deleteMigration,
   updateMigration,
 } from '../services/migrationService';
+import { uploadImage } from '../services/uploadService'; // ✅ Import upload
 import './ManageMigrations.css';
 
 export default function ManageMigrations() {
@@ -44,24 +45,39 @@ export default function ManageMigrations() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let imageUrl = form.image;
+
+    if (form.image instanceof File) {
+      try {
+        imageUrl = await uploadImage(form.image);
+      } catch (err) {
+        console.error('Image upload failed', err);
+        return;
+      }
+    }
+
     const payload = {
       title: form.title,
-      image: form.image,
+      image: imageUrl,
       subtitles: form.subtitles,
     };
 
-    if (editingId) {
-      const res = await updateMigration(editingId, payload);
-      setMigrations((prev) =>
-        prev.map((m) => (m._id === editingId ? res.data : m))
-      );
-    } else {
-      const res = await createMigration(payload);
-      setMigrations([res.data, ...migrations]);
-    }
+    try {
+      if (editingId) {
+        const res = await updateMigration(editingId, payload);
+        setMigrations((prev) =>
+          prev.map((m) => (m._id === editingId ? res.data : m))
+        );
+      } else {
+        const res = await createMigration(payload);
+        setMigrations([res.data, ...migrations]);
+      }
 
-    setForm({ title: '', image: '', subtitles: [{ title: '', content: '' }] });
-    setEditingId(null);
+      setForm({ title: '', image: '', subtitles: [{ title: '', content: '' }] });
+      setEditingId(null);
+    } catch (err) {
+      console.error('Failed to submit migration', err);
+    }
   };
 
   const handleEdit = (migration) => {
@@ -104,6 +120,21 @@ export default function ManageMigrations() {
           required
         />
         <input type="file" name="image" onChange={handleChange} />
+
+        {/* 👁️ Image Preview */}
+        {form.image && (
+          <div className="image-preview">
+            <img
+              src={
+                form.image instanceof File
+                  ? URL.createObjectURL(form.image)
+                  : form.image
+              }
+              alt="Preview"
+              style={{ width: '150px', marginTop: '10px' }}
+            />
+          </div>
+        )}
 
         <h3>Subtitles & Content</h3>
         {form.subtitles.map((sub, index) => (
@@ -167,8 +198,6 @@ export default function ManageMigrations() {
           </div>
         ))}
       </div>
-
-      
     </div>
   );
 }

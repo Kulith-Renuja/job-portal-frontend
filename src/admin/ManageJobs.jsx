@@ -5,6 +5,7 @@ import {
   deleteJob,
   updateJob,
 } from '../services/jobService';
+import { uploadImage } from '../services/uploadService'; // ✅ Added
 import './ManageJobs.css';
 
 export default function ManageJobs() {
@@ -21,26 +22,23 @@ export default function ManageJobs() {
   });
   const [editId, setEditId] = useState(null);
 
-  // 🔁 Fetch jobs from backend
   useEffect(() => {
-    const loadJobs = async () => {
-      setLoading(true);
-      try {
-        const res = await fetchJobs();
-        const sorted = res.data.sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        );
-        setJobs(sorted);
-      } catch (err) {
-        console.error('Failed to load jobs', err);
-      } finally {
-        setLoading(false);
-      }
-    };
     loadJobs();
   }, []);
 
-  // 📝 Handle form change
+  const loadJobs = async () => {
+    setLoading(true);
+    try {
+      const res = await fetchJobs();
+      const sorted = res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setJobs(sorted);
+    } catch (err) {
+      console.error('Failed to load jobs', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setForm((prev) => ({
@@ -49,12 +47,24 @@ export default function ManageJobs() {
     }));
   };
 
-  // ➕ Add or ✏️ Edit job
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      const jobData = { ...form };
+      let imageUrl = form.image;
+
+      if (form.image instanceof File) {
+        try {
+          imageUrl = await uploadImage(form.image);
+        } catch (uploadErr) {
+          console.error('Image upload failed:', uploadErr);
+          setLoading(false);
+          return;
+        }
+      }
+
+      const jobData = { ...form, image: imageUrl };
 
       if (editId) {
         await updateJob(editId, jobData);
@@ -62,11 +72,7 @@ export default function ManageJobs() {
         await createJob(jobData);
       }
 
-      const res = await fetchJobs();
-      const sorted = res.data.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
-      setJobs(sorted);
+      await loadJobs();
       setForm({ title: '', place: '', company: '', category: '', content: '', image: '' });
       setEditId(null);
     } catch (err) {
@@ -76,7 +82,6 @@ export default function ManageJobs() {
     }
   };
 
-  // 🗑 Delete job
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this job?')) return;
     try {
@@ -87,7 +92,6 @@ export default function ManageJobs() {
     }
   };
 
-  // ✏️ Edit button
   const handleEdit = (job) => {
     setEditId(job._id);
     setForm({
@@ -111,7 +115,7 @@ export default function ManageJobs() {
     <div className="manage-jobs">
       <h1 className="manage-title">Manage Jobs</h1>
 
-    <form onSubmit={handleSubmit} className="job-form">
+      <form onSubmit={handleSubmit} className="job-form">
         <h2>{editId ? 'Edit Job' : 'Add New Job'}</h2>
         <input type="text" name="title" placeholder="Job Title" value={form.title} onChange={handleChange} required />
         <input type="text" name="place" placeholder="Location" value={form.place} onChange={handleChange} required />
@@ -119,15 +123,35 @@ export default function ManageJobs() {
         <input type="text" name="category" placeholder="Category" value={form.category} onChange={handleChange} required />
         <textarea name="content" placeholder="Job Description" value={form.content} onChange={handleChange} required />
         <input type="file" name="image" onChange={handleChange} />
+
+        {/* 👁️ Optional Image Preview */}
+        {form.image && (
+          <div className="image-preview">
+            <img
+              src={form.image instanceof File ? URL.createObjectURL(form.image) : form.image}
+              alt="Preview"
+              style={{ width: '150px', height: 'auto', marginTop: '10px' }}
+            />
+          </div>
+        )}
+
         <button type="submit" disabled={loading}>
           {editId ? 'Update Job' : 'Add Job'}
         </button>
         {editId && (
-          <button type="button" onClick={() => { setEditId(null); setForm({ title: '', place: '', company: '', category: '', content: '', image: '' }) }}>Cancel</button>
+          <button
+            type="button"
+            onClick={() => {
+              setEditId(null);
+              setForm({ title: '', place: '', company: '', category: '', content: '', image: '' });
+            }}
+          >
+            Cancel
+          </button>
         )}
       </form>
 
-        <h1 className="manage-title">Search job</h1>
+      <h1 className="manage-title">Search job</h1>
       <input
         type="text"
         className="search-input"
@@ -147,8 +171,6 @@ export default function ManageJobs() {
           </div>
         ))}
       </div>
-
-      
     </div>
   );
 }

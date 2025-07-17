@@ -5,6 +5,7 @@ import {
   updateCourse,
   deleteCourse,
 } from '../services/courseService';
+import { uploadImage } from '../services/uploadService'; // ✅ Added
 import './ManageCourses.css';
 
 export default function ManageCourses() {
@@ -66,19 +67,25 @@ export default function ManageCourses() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const payload = { ...form };
+      let imageUrl = form.image;
 
       if (form.image instanceof File) {
-        // if image upload needed in future
-      } else {
-        delete payload.image;
+        try {
+          imageUrl = await uploadImage(form.image);
+        } catch (uploadErr) {
+          console.error('Image upload failed:', uploadErr);
+          return;
+        }
       }
+
+      const payload = { ...form, image: imageUrl };
 
       if (editingCourseId) {
         await updateCourse(editingCourseId, payload);
       } else {
         await createCourse(payload);
       }
+
       resetForm();
       loadCourses();
     } catch (err) {
@@ -118,6 +125,21 @@ export default function ManageCourses() {
           required
         />
         <input type="file" name="image" onChange={handleChange} />
+
+        {/* 👁️ Optional Preview */}
+        {form.image && (
+          <div className="image-preview">
+            <img
+              src={
+                form.image instanceof File
+                  ? URL.createObjectURL(form.image)
+                  : form.image
+              }
+              alt="Preview"
+              style={{ width: '150px', marginTop: '10px' }}
+            />
+          </div>
+        )}
 
         <h3>Subtitles & Content</h3>
         {form.subtitles.map((sub, index) => (
@@ -166,8 +188,6 @@ export default function ManageCourses() {
           </div>
         ))}
       </div>
-
-      
     </div>
   );
 }

@@ -5,6 +5,7 @@ import {
   updateStory,
   deleteStory
 } from '../services/storyService';
+import { uploadImage } from '../services/uploadService'; // ✅ Cloudinary upload
 import './ManageStories.css';
 
 export default function ManageStories() {
@@ -36,13 +37,24 @@ export default function ManageStories() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const payload = {
-        title: form.title,
-        content: form.content,
-        image: form.image // This is now a string (URL), not a file
-      };
+    let imageUrl = form.image;
 
+    if (form.image instanceof File) {
+      try {
+        imageUrl = await uploadImage(form.image);
+      } catch (err) {
+        console.error('Image upload failed', err);
+        return;
+      }
+    }
+
+    const payload = {
+      title: form.title,
+      content: form.content,
+      image: imageUrl || '',
+    };
+
+    try {
       if (editingId) {
         await updateStory(editingId, payload);
       } else {
@@ -67,7 +79,7 @@ export default function ManageStories() {
   };
 
   const handleEdit = (story) => {
-    setForm({ title: story.title, image: null, content: story.content });
+    setForm({ title: story.title, image: story.image, content: story.content });
     setEditingId(story._id);
   };
 
@@ -82,6 +94,7 @@ export default function ManageStories() {
 
       <form className="story-form" onSubmit={handleSubmit}>
         <h2>{editingId ? 'Edit Story' : 'Add New Story'}</h2>
+
         <input
           type="text"
           name="title"
@@ -90,13 +103,24 @@ export default function ManageStories() {
           onChange={handleChange}
           required
         />
-        <input
-          type="text"
-          name="image"
-          placeholder="Image URL"
-          value={form.image || ''}
-          onChange={handleChange}
-        />
+
+        <input type="file" name="image" onChange={handleChange} />
+
+        {/* 👁️ Image Preview */}
+        {form.image && (
+          <div className="image-preview">
+            <img
+              src={
+                form.image instanceof File
+                  ? URL.createObjectURL(form.image)
+                  : form.image
+              }
+              alt="Preview"
+              style={{ width: '150px', height: 'auto', marginTop: '10px' }}
+            />
+          </div>
+        )}
+
         <textarea
           name="content"
           placeholder="Story Content"
@@ -105,6 +129,7 @@ export default function ManageStories() {
           onChange={handleChange}
           required
         />
+
         <button type="submit" className="submit-btn">
           {editingId ? 'Update Story' : 'Add Story'}
         </button>
@@ -128,7 +153,6 @@ export default function ManageStories() {
           </div>
         ))}
       </div>
-
     </div>
   );
 }
