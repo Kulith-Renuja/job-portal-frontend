@@ -1,24 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './ManageUsers.css';
+import { fetchUsers, updateUserStatus } from '../services/userService';
 
 export default function ManageUsers() {
   const [search, setSearch] = useState('');
-  const [users, setUsers] = useState([
-    { id: 1, name: 'Ayesha Perera', email: 'ayesha@gmail.com', phone: '0771234567', status: 'active' },
-    { id: 2, name: 'Nimal Silva', email: 'nimal.silva@example.com', phone: '0712345678', status: 'active' },
-    { id: 3, name: 'Chamari Karunaratne', email: 'chamari.k@jobs.lk', phone: '0759876543', status: 'flagged' },
-  ]);
+  const [users, setUsers] = useState([]);
 
-  const handleDeactivate = (id) => {
-    setUsers(users.map(user =>
-      user.id === id ? { ...user, status: 'deactivated' } : user
-    ));
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  const loadUsers = async () => {
+    try {
+      const res = await fetchUsers();
+      setUsers(res.data);
+    } catch (err) {
+      console.error('Failed to load users', err);
+    }
   };
 
-  const handleFlag = (id) => {
-    setUsers(users.map(user =>
-      user.id === id ? { ...user, status: 'flagged' } : user
-    ));
+  const changeStatus = async (id, status) => {
+    try {
+      await updateUserStatus(id, status);
+      setUsers(users.map(user =>
+        user._id === id ? { ...user, status } : user
+      ));
+    } catch (err) {
+      console.error('Status update failed', err);
+    }
   };
 
   const filteredUsers = users.filter(user =>
@@ -41,16 +50,18 @@ export default function ManageUsers() {
 
       <div className="user-list">
         {filteredUsers.map(user => (
-          <div key={user.id} className="user-row">
+          <div key={user._id} className="user-row">
             <div className="user-info">
               <p className="user-name">{user.name}</p>
               <p>{user.email}</p>
               <p>{user.phone}</p>
-              <p className={`user-status ${user.status}`}>Status: {user.status}</p>
+              <p className={`user-status ${user.status || 'active'}`}>
+                Status: {user.status || 'active'}
+              </p>
             </div>
             <div className="user-actions">
-              <button onClick={() => handleDeactivate(user.id)}>Deactivate</button>
-              <button className="flag" onClick={() => handleFlag(user.id)}>Flag</button>
+              <button onClick={() => changeStatus(user._id, 'deactivated')}>Deactivate</button>
+              <button className="flag" onClick={() => changeStatus(user._id, 'flagged')}>Flag</button>
             </div>
           </div>
         ))}
