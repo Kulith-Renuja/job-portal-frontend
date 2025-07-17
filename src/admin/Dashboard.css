@@ -17,31 +17,27 @@
 
 .dashboard-card {
   background-color: white;
+  border-left: 6px solid #0B669A;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .dashboard-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-card-title {
   font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #0B669A;
+  margin-bottom: 0.25rem;
 }
 
-.dashboard-card-title.jobs {
-  color: #FDC62C;
-}
-.dashboard-card-title.users {
-  color: #FDC62C;
-}
-.dashboard-card-title.courses {
-  color: #FDC62C;
-}
-.dashboard-card-title.migrations {
-  color: #FDC62C;
+.dashboard-card p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
 }

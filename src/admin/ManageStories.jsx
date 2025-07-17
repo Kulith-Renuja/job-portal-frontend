@@ -37,10 +37,11 @@ export default function ManageStories() {
     e.preventDefault();
 
     try {
-      const payload = new FormData();
-      payload.append('title', form.title);
-      payload.append('content', form.content);
-      if (form.image) payload.append('image', form.image);
+      const payload = {
+        title: form.title,
+        content: form.content,
+        image: form.image // This is now a string (URL), not a file
+      };
 
       if (editingId) {
         await updateStory(editingId, payload);
@@ -89,7 +90,13 @@ export default function ManageStories() {
           onChange={handleChange}
           required
         />
-        <input type="file" name="image" onChange={handleChange} />
+        <input
+          type="text"
+          name="image"
+          placeholder="Image URL"
+          value={form.image || ''}
+          onChange={handleChange}
+        />
         <textarea
           name="content"
           placeholder="Story Content"

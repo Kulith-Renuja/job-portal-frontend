@@ -31,17 +31,23 @@ export default function ManageCountries() {
   };
 
   const handleChange = (e, index = null, field = null) => {
-    const { name, value, files } = e.target;
-    if (name === 'image') {
-      setForm({ ...form, image: files[0] });
-    } else if (name === 'subtitle' || name === 'content') {
-      const updated = [...form.subtitles];
-      updated[index][field] = value;
-      setForm({ ...form, subtitles: updated });
+  const { name, value, files } = e.target;
+
+  if (index !== null && field) {
+    const updated = [...form.subtitles];
+    updated[index][field] = value;
+    setForm({ ...form, subtitles: updated });
+  } else if (name === 'image') {
+    if (e.target.type === 'file') {
+      setForm({ ...form, image: files && files.length > 0 ? files[0] : '' });
     } else {
-      setForm({ ...form, [name]: value });
+      setForm({ ...form, image: value });
     }
-  };
+  } else {
+    setForm({ ...form, [name]: value });
+  }
+};
+
 
   const addSubtitle = () => {
     setForm({ ...form, subtitles: [...form.subtitles, { title: '', content: '' }] });
@@ -66,25 +72,27 @@ export default function ManageCountries() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    data.append('title', form.title);
-    if (form.image) data.append('image', form.image);
-    data.append('subtitles', JSON.stringify(form.subtitles));
+  e.preventDefault();
 
-    try {
-      if (editingId) {
-        await updateCountry(editingId, data);
-      } else {
-        await createCountry(data);
-      }
-      setForm({ title: '', image: null, subtitles: [{ title: '', content: '' }] });
-      setEditingId(null);
-      loadCountries();
-    } catch (err) {
-      console.error('Submit failed:', err);
-    }
+  const data = {
+    title: form.title,
+    image: form.image,
+    subtitles: form.subtitles
   };
+
+  try {
+    if (editingId) {
+      await updateCountry(editingId, data);
+    } else {
+      await createCountry(data);
+    }
+    setForm({ title: '', image: '', subtitles: [{ title: '', content: '' }] });
+    setEditingId(null);
+    loadCountries();
+  } catch (err) {
+    console.error('Submit failed:', err);
+  }
+};
 
   return (
     <div className="manage-countries">
@@ -100,7 +108,14 @@ export default function ManageCountries() {
           onChange={handleChange}
           required
         />
-        <input type="file" name="image" onChange={handleChange} />
+        <input
+          type="text"
+          name="image"
+          placeholder="Image URL"
+          value={form.image || ''}
+          onChange={handleChange}
+        />
+
 
         <h3>Subtitles & Content</h3>
         {form.subtitles.map((sub, index) => (
@@ -136,7 +151,7 @@ export default function ManageCountries() {
             type="button"
             onClick={() => {
               setEditingId(null);
-              setForm({ title: '', image: null, subtitles: [{ title: '', content: '' }] });
+              setForm({ title: '', image: '', subtitles: [{ title: '', content: '' }] });
             }}
             className="cancel-btn "
           >
