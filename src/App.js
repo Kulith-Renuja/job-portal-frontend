@@ -5,6 +5,7 @@ import {
   useLocation
 } from 'react-router-dom';
 
+// Importing components and pages client-side
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -17,6 +18,13 @@ import About from './pages/About';
 import Auth from './pages/Auth';
 import Migrations from './pages/Migrations';
 import Countries from './pages/Countries';
+
+// Importing details pages
+import JobDetails from './pages/DetailsPages/JobDetails';
+import CourseDetails from './pages/DetailsPages/CourseDetails';
+import MigrationDetails from './pages/DetailsPages/MigrationDetails';
+import StoryDetails from './pages/DetailsPages/StoryDetails';
+import CountryDetails from './pages/DetailsPages/CountryDetails';
 
 // Admin Layout and Pages
 import AdminLayout from './admin/AdminLayout';
@@ -115,6 +123,46 @@ function AppLayout() {
       <Account />
       </ProtectedRoute>
       }
+      />
+      <Route
+        path="/jobs/:id"
+        element={
+          <ProtectedRoute>
+            <JobDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/courses/:id"
+        element={
+          <ProtectedRoute>
+            <CourseDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/migration/:id"
+        element={
+          <ProtectedRoute>
+            <MigrationDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/stories/:id"
+        element={
+          <ProtectedRoute>
+            <StoryDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/countries/:id"
+        element={
+          <ProtectedRoute>
+            <CountryDetails />
+          </ProtectedRoute>
+        }
       />
       
         {/* Admin Routes (protected) */}

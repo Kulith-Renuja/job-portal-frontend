@@ -1,0 +1,36 @@
+.job-details {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.job-title {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.job-company,
+.job-location {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.job-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+}
+
+.job-description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333;
+}

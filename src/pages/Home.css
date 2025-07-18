@@ -1,5 +1,6 @@
 .home-page {
 padding-bottom: 3rem;
+background: linear-gradient(to left, #beeefe, #ffffff)
 }
 
 /* Country Section */
@@ -7,6 +8,7 @@ padding-bottom: 3rem;
 padding: 3rem 1rem;
 background-color: #f9fafb;
 text-align: center;
+
 }
 
 .countries-title {

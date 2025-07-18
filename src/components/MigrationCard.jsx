@@ -9,7 +9,7 @@ export default function MigrationCard({ migration }) {
       <p className="migration-subtitle">
         {migration.subtitles && migration.subtitles[0]?.title}
       </p>
-      <Link to={`/migrations/${migration._id}`} className="migration-btn">
+      <Link to={`/migration/${migration._id}`} className="migration-btn">
         View Article
       </Link>
     </div>

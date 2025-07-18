@@ -1,5 +1,5 @@
 import './StoryCard.css';
-
+import { Link } from 'react-router-dom';
 
 export default function StoryCard({ story }) {
   return (
@@ -7,8 +7,10 @@ export default function StoryCard({ story }) {
       <img src={story.image} alt={story.title} className="story-image" />
       <div className="story-content">
         <h3 className="story-title">{story.title}</h3>
-        <p className="story-desc">{story.description}</p>
-        <button className="story-btn">Read More →</button>
+        <p className="story-desc">{story.content}</p>
+        <Link to={`/stories/${story._id}`}>
+          <button className="story-btn">Read More →</button>
+        </Link>
       </div>
     </div>
   );

@@ -1,0 +1,42 @@
+.migration-details {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.migration-title {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.migration-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  margin: 1rem 0;
+  border-radius: 10px;
+}
+
+.migration-content {
+  margin-top: 2rem;
+}
+
+.subtitle-section {
+  margin-bottom: 1.8rem;
+}
+
+.subtitle-section h3 {
+  font-size: 1.3rem;
+  color: var(--primary);
+  margin-bottom: 0.4rem;
+}
+
+.subtitle-section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
