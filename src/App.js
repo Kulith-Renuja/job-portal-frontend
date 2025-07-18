@@ -16,6 +16,7 @@ import Account from './pages/Account';
 import About from './pages/About';
 import Auth from './pages/Auth';
 import Migrations from './pages/Migrations';
+import Countries from './pages/Countries';
 
 // Admin Layout and Pages
 import AdminLayout from './admin/AdminLayout';
@@ -64,6 +65,14 @@ function AppLayout() {
       element={
       <ProtectedRoute>
       <Migrations />
+      </ProtectedRoute>
+      }
+      />
+      <Route
+      path="/countries"
+      element={
+      <ProtectedRoute>
+      <Countries />
       </ProtectedRoute>
       }
       />
