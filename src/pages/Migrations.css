@@ -1,0 +1,41 @@
+.migrations-page {
+  padding: 3rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.migrations-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.migrations-header h1 {
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.migrations-header p {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.migration-search-bar {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.migration-search-bar input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 300px;
+  font-size: 1rem;
+}
+
+.migrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}

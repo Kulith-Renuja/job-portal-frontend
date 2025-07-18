@@ -84,6 +84,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  align-items: center; 
 }
 
 .search-input,

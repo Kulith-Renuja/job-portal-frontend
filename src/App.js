@@ -15,6 +15,7 @@ import Courses from './pages/Courses';
 import Account from './pages/Account';
 import About from './pages/About';
 import Auth from './pages/Auth';
+import Migrations from './pages/Migrations';
 
 // Admin Layout and Pages
 import AdminLayout from './admin/AdminLayout';
@@ -55,6 +56,14 @@ function AppLayout() {
       element={
       <ProtectedRoute>
       <Categories />
+      </ProtectedRoute>
+      }
+      />
+      <Route
+      path="/migration"
+      element={
+      <ProtectedRoute>
+      <Migrations />
       </ProtectedRoute>
       }
       />
