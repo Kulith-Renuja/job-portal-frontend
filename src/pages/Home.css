@@ -1,0 +1,69 @@
+.home-page {
+padding-bottom: 3rem;
+}
+
+/* Country Section */
+.countries-home {
+padding: 3rem 1rem;
+background-color: #f9fafb;
+text-align: center;
+}
+
+.countries-title {
+font-size: 1.8rem;
+color: var(--primary);
+margin-bottom: 1.5rem;
+}
+
+.country-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+gap: 1.5rem;
+justify-items: center;
+max-width: 800px;
+margin: 0 auto;
+}
+
+.country-card {
+background: white;
+border-radius: 10px;
+padding: 1rem;
+box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+transition: transform 0.2s ease;
+}
+
+.country-card:hover {
+transform: translateY(-4px);
+}
+
+.country-image {
+width: 60px;
+height: 40px;
+object-fit: cover;
+border-radius: 4px;
+margin-bottom: 0.5rem;
+}
+
+.country-title {
+font-weight: 500;
+font-size: 1rem;
+color: #333;
+}
+
+.countries-home .view-more-container {
+margin-top: 2rem;
+}
+
+.countries-home .view-more-btn {
+background-color: var(--accent);
+color: var(--primary);
+padding: 0.6rem 1.5rem;
+border: none;
+border-radius: 8px;
+font-weight: bold;
+cursor: pointer;
+}
+
+.countries-home .view-more-btn:hover {
+background-color: #f0b000;
+}

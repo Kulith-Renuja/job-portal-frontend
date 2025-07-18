@@ -1,34 +1,61 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Categories from '../components/Categories';
 import JobCard from '../components/JobCard';
 import StoryCard from '../components/StoryCard';
 import CourseCard from '../components/CourseCard';
-import firstImg from '../assets/stories/1.jpg';
-import scondImg from '../assets/stories/2.jpg';
-import thirdImg from '../assets/stories/3.jpg';
+import CountryCard from '../components/CountryCard';
 import MoreButton from '../components/MoreButton';
-import CountriesSection from '../components/CountriesSection';
-
-
-
+import {
+  fetchJobs
+} from '../services/jobService';
+import {
+  fetchCourses
+} from '../services/courseService';
+import {
+  fetchStories
+} from '../services/storyService';
+import {
+  fetchCountries
+} from '../services/countryService';
+import './Home.css';
 
 export default function Home() {
-  const jobs = [
-    {
-      title: 'Frontend Developer',
-      company: 'TechNova',
-      location: 'Colombo, Sri Lanka',
-    },
-    {
-      title: 'Marketing Specialist',
-      company: 'BrightAds',
-      location: 'Remote',
-    },
-    {
-      title: 'UI/UX Designer',
-      company: 'Designify',
-      location: 'Galle',
+  const [search, setSearch] = useState('');
+  const [jobs, setJobs] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [stories, setStories] = useState([]);
+  const [countries, setCountries] = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [jobRes, courseRes, storyRes, countryRes] = await Promise.all([
+          fetchJobs(),
+          fetchCourses(),
+          fetchStories(),
+          fetchCountries(),
+        ]);
+        setJobs(jobRes.data.slice(0, 3));
+        setCourses(courseRes.data.slice(0, 3));
+        setStories(storyRes.data.slice(0, 3));
+        setCountries(countryRes.data.slice(0, 5));
+      } catch (err) {
+        console.error('Failed to fetch home data:', err);
+      }
+    };
+    loadData();
+  }, []);
+
+  const handleSearch = () => {
+    if (search.trim()) {
+      navigate(`/jobs?search=${encodeURIComponent(search)}`);
+    } else {
+      navigate('/jobs');
     }
-  ];
+  };
 
   return (
     <div className="home-page">
@@ -40,74 +67,56 @@ export default function Home() {
             type="text"
             placeholder="Search for jobs, titles, or keywords..."
             className="search-input"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-          <button className="search-button">Search</button>
+          <button className="search-button" onClick={handleSearch}>Search</button>
         </div>
       </section>
 
       <Categories />
-      <CountriesSection />
+
+      <section className="countries-section">
+        <h2 className="section-title">ගොඩයන Countries</h2>
+        <div className="country-grid">
+          {countries.map((country) => (
+            <CountryCard key={country._id} country={country} />
+          ))}
+        </div>
+        <div className="view-more-container">
+          <MoreButton to="/countries" />
+        </div>
+      </section>
 
       <section className="job-listings">
         <h2 className="section-title">ගොඩයන Jobs</h2>
         <div className="job-grid">
-          {jobs.map((job, index) => (
-            <JobCard key={index} job={job} />
+          {jobs.map((job) => (
+            <JobCard key={job._id} job={job} />
           ))}
         </div>
         <MoreButton to="/jobs" />
       </section>
 
-        <section className="courses">
-            <h2 className="section-title">ගොඩයන Courses</h2>
-            <div className="courses-grid">
-                {[
-                {
-                    title: 'Full-Stack Web Development',
-                    provider: 'Coursera by Meta',
-                    duration: '6 Months'
-                },
-                {
-                    title: 'Digital Marketing Basics',
-                    provider: 'Google Digital Garage',
-                    duration: '2 Weeks'
-                },
-                {
-                    title: 'UI/UX Design Foundations',
-                    provider: 'Skillshare',
-                    duration: '1 Month'
-                }
-                ].map((course, index) => (
-                <CourseCard key={index} course={course} />
-                ))}
-            </div>
-            <MoreButton to="/courses" />
-            </section>
-            <section className="stories">
-              <h2 className="section-title">ගොඩයන  Stories</h2>
-              <div className="stories-grid">
-                  {[
-                  {
-                      title: 'How I Landed My First Tech Job',
-                      description: 'Step-by-step journey from student to software developer.',
-                      image: firstImg
-                  },
-                  {
-                      title: 'Top Resume Tips for 2025',
-                      description: 'What hiring managers want to see (and what they don’t).',
-                      image: scondImg
-                  },
-                  {
-                      title: 'How to Work Remotely',
-                      description: 'Practical advice to stay productive and balanced.',
-                      image: thirdImg
-                  }
-                  ].map((story, index) => (
-                  <StoryCard key={index} story={story} />
-                  ))}
-              </div>
-              <MoreButton to="/stories" />
-              </section>
+      <section className="courses">
+        <h2 className="section-title">ගොඩයන Courses</h2>
+        <div className="courses-grid">
+          {courses.map((course) => (
+            <CourseCard key={course._id} course={course} />
+          ))}
+        </div>
+        <MoreButton to="/courses" />
+      </section>
+
+      <section className="stories">
+        <h2 className="section-title">ගොඩයන Stories</h2>
+        <div className="stories-grid">
+          {stories.map((story) => (
+            <StoryCard key={story._id} story={story} />
+          ))}
+        </div>
+        <MoreButton to="/stories" />
+      </section>
     </div>
   );
 }

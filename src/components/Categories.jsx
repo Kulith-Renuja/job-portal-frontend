@@ -1,25 +1,26 @@
+// components/Categories.jsx
 import './Categories.css';
+import { Link } from 'react-router-dom';
 
 import itImg from '../assets/categories/it.jpg';
 import marketingImg from '../assets/categories/marketing.jpg';
 import financeImg from '../assets/categories/finance.jpg';
-import salesImg from '../assets/categories/sales.jpg';
-import healthcareImg from '../assets/categories/healthcare.jpg';
-import educationImg from '../assets/categories/education.jpg';
-
 
 const categories = [
   {
     name: 'ගොඩයන Jobs',
-    image: itImg
+    image: itImg,
+    path: '/jobs'
   },
   {
-    name: 'ගොඩයන Visa',
-    image: marketingImg
+    name: 'ගොඩයන Migration',
+    image: marketingImg,
+    path: '/migration'
   },
   {
     name: 'ගොඩයන Courses',
-    image: financeImg
+    image: financeImg,
+    path: '/courses'
   }
 ];
 
@@ -34,7 +35,9 @@ export default function Categories() {
               <img src={cat.image} alt={cat.name} className="category-img" />
               <h3 className="category-title-overlay">{cat.name}</h3>
             </div>
-            <button className="explore">Explore</button>
+            <Link to={cat.path}>
+              <button className="explore">Explore</button>
+            </Link>
           </div>
         ))}
       </div>
