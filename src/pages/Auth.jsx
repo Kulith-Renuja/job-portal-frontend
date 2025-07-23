@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Auth() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [loginPhone, setLoginPhone] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [registerName, setRegisterName] = useState('');
@@ -92,9 +92,10 @@ export default function Auth() {
       </div>
 
       <div className="auth-right">
+        <h1 className="auth-h1">ජීවිතේම ගොඩයන්න</h1>
         <div className="tabs">
-          <button onClick={() => setIsLogin(true)} className={isLogin ? 'active' : ''}>Login</button>
           <button onClick={() => setIsLogin(false)} className={!isLogin ? 'active' : ''}>Register</button>
+          <button onClick={() => setIsLogin(true)} className={isLogin ? 'active' : ''}>Login</button>
         </div>
 
         {error && <p className="error-text">{error}</p>}

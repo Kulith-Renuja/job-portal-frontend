@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-container">
-        <Link to="/" className="logo">JobPortal</Link>
+        <Link to="/" className="logo">Godayana.lk</Link>
 
         <button className="menu-toggle" onClick={toggleMenu}>
           ☰

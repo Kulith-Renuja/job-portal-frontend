@@ -46,6 +46,15 @@
   justify-content: center;
 }
 
+.auth-h1 {
+  font-family: 'Noto Sans Sinhala', sans-serif;
+  color: #0B669A;
+  font-size: 2rem;
+  text-align: center  ;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+}
+
 .tabs {
   display: flex;
   justify-content: center;

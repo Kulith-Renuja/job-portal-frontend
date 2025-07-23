@@ -61,7 +61,6 @@ export default function Home() {
     <div className="home-page">
       <section className="hero">
         <h1>ජීවිතේම ගොඩයන්න</h1>
-        <p>Explore top categories, jobs, stories and more.</p>
         <div className="search-bar">
           <input
             type="text"
