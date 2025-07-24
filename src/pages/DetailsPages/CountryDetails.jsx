@@ -29,8 +29,6 @@ export default function CountryDetails() {
   return (
     <div className="country-details">
       <h1 className="country-title">{country.title}</h1>
-      <img src={country.image} alt={country.title} className="country-image" />
-
       {country.subtitles && country.subtitles.map((item, index) => (
         <div key={index} className="country-section">
           <h3>{item.title}</h3>

@@ -2,31 +2,28 @@
 import './Categories.css';
 import { Link } from 'react-router-dom';
 
-import itImg from '../assets/categories/it.jpg';
-import marketingImg from '../assets/categories/marketing.jpg';
-import financeImg from '../assets/categories/finance.jpg';
+import Jobs from '../assets/categories/Jobs.png';
+import Migration from '../assets/categories/Migration.png';
+import Courses from '../assets/categories/Courses.png';
 
 const categories = [
   {
     name: 'ගොඩයන Jobs',
-    image: itImg,
+    image: Jobs,
     path: '/jobs',
-    description: 'Find your dream career opportunities',
-    icon: '💼'
+    description: 'Find your dream career opportunities'
   },
   {
     name: 'ගොඩයන Migration',
-    image: marketingImg,
+    image: Migration,
     path: '/migration',
-    description: 'Your pathway to global opportunities',
-    icon: '🌍'
+    description: 'Your pathway to global opportunities'
   },
   {
     name: 'ගොඩයන Courses',
-    image: financeImg,
+    image: Courses,
     path: '/courses',
-    description: 'Enhance your skills and knowledge',
-    icon: '📚'
+    description: 'Enhance your skills and knowledge'
   }
 ];
 
@@ -43,7 +40,6 @@ export default function Categories() {
             <div className="category-image-container">
               <img src={cat.image} alt={cat.name} className="category-img" />
               <div className="category-overlay">
-                <div className="category-icon">{cat.icon}</div>
                 <h3 className="category-title-overlay">{cat.name}</h3>
                 <p className="category-description">{cat.description}</p>
               </div>

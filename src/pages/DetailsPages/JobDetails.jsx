@@ -29,10 +29,10 @@ export default function JobDetails() {
   return (
     <div className="job-details">
       <h1 className="job-title">{job.title}</h1>
+      <br />
       <p className="job-company">Company - {job.company}</p>
-      <p className="job-location">{job.place}</p>
-
-      {job.image && <img src={job.image} alt={job.title} className="job-image" />}
+      <p className="job-location">Place - {job.place}</p>
+      <br />
       <div className="job-description">
         <p>{job.content}</p>
       </div>
