@@ -5,6 +5,8 @@
   --dark: #1e293b;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200..800&display=swap');
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -20,9 +22,9 @@ body {
 
 
 .hero h1 {
-  font-family: 'Noto Sans Sinhala', sans-serif;
+  font-family: "Gemunu Libre",'Noto Sans Sinhala', sans-serif;
   color: var(--primary);
-  font-size: 3.5rem;
+  font-size: 6rem;
 }
 
 .hero p {
@@ -120,4 +122,8 @@ body {
 
 .search-button:hover {
   background-color: #f0b000;
+}
+
+section .section-title {
+  font-size: 2.5rem;
 }

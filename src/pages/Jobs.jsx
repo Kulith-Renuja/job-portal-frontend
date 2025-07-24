@@ -61,7 +61,7 @@ export default function Jobs() {
         />
       </section>
 
-      <h2 className="section-title">Available Jobs</h2>
+      <h2 className="section-title">ගොඩයන Jobs</h2>
       <div className="job-grid">
         {filteredJobs.length > 0 ? (
           filteredJobs.map((job) => <JobCard key={job._id} job={job} />)

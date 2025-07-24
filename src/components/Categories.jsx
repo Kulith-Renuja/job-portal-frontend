@@ -40,7 +40,7 @@ export default function Categories() {
             <div className="category-image-container">
               <img src={cat.image} alt={cat.name} className="category-img" />
               <div className="category-overlay">
-                <h3 className="category-title-overlay">{cat.name}</h3>
+                {/*<h3 className="category-title-overlay">{cat.name}</h3>*/}
                 <p className="category-description">{cat.description}</p>
               </div>
               <div className="category-gradient"></div>
