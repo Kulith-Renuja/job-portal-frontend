@@ -41,7 +41,7 @@ export default function Home() {
         setJobs(jobRes.data.slice(0, 3));
         setCourses(courseRes.data.slice(0, 3));
         setStories(storyRes.data.slice(0, 3));
-        setCountries(countryRes.data.slice(0, 5));
+        setCountries(countryRes.data.slice(0, 6));
       } catch (err) {
         console.error('Failed to fetch home data:', err);
       }
@@ -61,6 +61,7 @@ export default function Home() {
     <div className="home-page">
       <section className="hero">
         <h1>ජීවිතේම ගොඩයන්න</h1>
+        <p>ලංකාවේ විශ්වාසවන්තම ඩිජිටල් අවකාශය.</p>
         <div className="search-bar">
           <input
             type="text"
