@@ -9,6 +9,7 @@ export default function JobCard({ job }) {
   });
 
   return (
+    <Link to={`/jobs/${job._id}`} className="job-link">
     <div className="job-card full-width">
       <div className="job-card-header">
         <h3 className="job-title">{job.title}</h3>
@@ -17,10 +18,9 @@ export default function JobCard({ job }) {
       </div>
       <div className="job-footer">
         <span className="posted-date">Posted: {formattedDate}</span>
-        <Link to={`/jobs/${job._id}`}>
-          <button className="job-btn">View Details</button>
-        </Link>
+          <button className="job-btn">Apply Now</button>
       </div>
     </div>
+    </Link>
   );
 }

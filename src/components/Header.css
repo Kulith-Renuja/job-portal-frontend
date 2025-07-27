@@ -83,3 +83,34 @@
     }
   }
 }
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  border-radius: 6px;
+  z-index: 100;
+}
+
+.dropdown-menu a {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--dark);
+}
+
+.dropdown-menu a:hover {
+  background-color: #f5f5f5;
+  color: var(--primary);
+}
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
