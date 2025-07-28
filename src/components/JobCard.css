@@ -22,23 +22,29 @@
   border-left-color: #0B669A;
 }
 
+.job-card-header{
+  display: flex;
+  flex-direction: column;
+  gap: 0.0; /* compact vertical spacing */
+}
+
 .job-title {
-  font-size: 1.25rem;
+  font-size: 1.25rem !important;
   color: var(--primary);
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.0 !important;
 }
 
 .job-company {
-  font-size: 1rem;
+  font-size: 1rem !important;
   color: #444;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.0 !important;
 }
 
 .job-location {
-  font-size: 0.95rem;
+  font-size: 0.95rem !important;
   color: #666;
-  margin-bottom: 1rem;
+  margin-bottom: 0 !important;
 }
 
 .job-footer {
@@ -60,7 +66,7 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 0.800rem;
   font-weight: 600;
   transition: all 0.3s ease;
 }

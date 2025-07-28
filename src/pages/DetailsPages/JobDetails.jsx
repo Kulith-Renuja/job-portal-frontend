@@ -30,13 +30,13 @@ export default function JobDetails() {
     <div className="job-details">
       <h1 className="job-title">{job.title}</h1>
       <br />
-      {job.image && <img src={job.image} className="job-image" />}
       <p className="job-company">Company - {job.company}</p>
       <p className="job-location">Location - {job.place}</p>
       <br />
       <div className="job-description">
         <p>{job.content}</p>
       </div>
+      {job.image && <img src={job.image} className="job-image" />}
     </div>
   );
 }
