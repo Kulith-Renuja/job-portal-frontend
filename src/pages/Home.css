@@ -66,7 +66,7 @@ margin-top: 2rem;
 
 .countries-home .view-more-btn {
 background-color: var(--accent);
-color: var(--primary);
+color: rgb(0, 0, 0);
 padding: 0.6rem 1.5rem;
 border: none;
 border-radius: 8px;
@@ -116,17 +116,6 @@ background-color: #f0b000;
   line-height: 1.2;
 }
 
-.search-button {
-  padding: 0 1.5rem; /* Remove vertical padding if height is fixed */
-  height: 48px;
-  background-color: var(--accent);
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  line-height: 1.2;
-}
-
 .search-button:hover {
   background-color: #f0b000;
 }
@@ -157,9 +146,9 @@ body {
 }
 
 .hero p {
-  font-family: "Gemunu Libre",'Noto Sans Sinhala', sans-serif;
+  font-family: 'Noto Sans Sinhala', sans-serif;
   color: var(--dark);
-  font-size: 1.9rem;
+  font-size: 1.2rem;
 }
 
 .job-listings {

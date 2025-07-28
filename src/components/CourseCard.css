@@ -18,15 +18,15 @@
   border-left: 5px solid var(--primary);
 }
 
-.course-title {
-  font-size: 1.2rem;
+.course-card .course-title {
+  font-size: 1.3rem !important;
   font-weight: 600;
   color: var(--primary);
   margin-bottom: 0.25rem;
 }
 
-.course-provider {
-  font-size: 0.95rem;
+.course-card .course-provider {
+  font-size: 1rem;
   color: #555;
 }
 
