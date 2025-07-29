@@ -26,8 +26,8 @@ export default function Migrations() {
   return (
     <div className="migrations-page">
       <section className="migrations-header">
-        <h1>Migrations & Settlement Guides</h1>
-        <p>Learn how to move, settle, and thrive in new countries.</p>
+        <h1>ගොඩයන Visa</h1>
+        {/*<p>Learn how to move, settle, and thrive in new countries.</p>*/}
         <div className="migration-search-bar">
           <input
             type="text"

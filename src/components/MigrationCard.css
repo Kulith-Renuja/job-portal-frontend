@@ -22,12 +22,14 @@
 }
 
 .migration-title {
+  font-family: "Gemunu Libre", "Noto Sans Sinhala", sans-serif;
   font-size: 1.1rem;
   font-weight: bold;
   color: var(--primary);
 }
 
 .migration-subtitle {
+  font-family: "Noto Sans Sinhala", sans-serif;
   font-size: 0.9rem;
   color: #555;
   margin-top: 0.5rem;

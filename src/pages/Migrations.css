@@ -10,8 +10,9 @@
 }
 
 .migrations-header h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   color: var(--primary);
+  font-family: "Gemunu Libre", "Noto Sans Sinhala", sans-serif;
 }
 
 .migrations-header p {

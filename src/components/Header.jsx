@@ -52,7 +52,7 @@ export default function Header() {
             <span className="dropdown-toggle">Categories ▾</span>
             {dropdownOpen && (
               <div className="dropdown-menu">
-                <Link to="/migration" onClick={() => setOpen(false)}>Migration</Link>
+                <Link to="/visa" onClick={() => setOpen(false)}>Visa</Link>
                 <Link to="/stories" onClick={() => setOpen(false)}>Stories</Link>
                 <Link to="/countries" onClick={() => setOpen(false)}>Countries</Link>
               </div>

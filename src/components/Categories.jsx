@@ -16,7 +16,7 @@ const categories = [
   {
     name: 'ගොඩයන Migration',
     image: Migration,
-    path: '/migration',
+    path: '/visa',
     description: 'Your pathway to global opportunities'
   },
   {

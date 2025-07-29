@@ -69,7 +69,7 @@ function AppLayout() {
       }
       />
       <Route
-      path="/migration"
+      path="/visa"
       element={
       <ProtectedRoute>
       <Migrations />
