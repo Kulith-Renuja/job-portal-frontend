@@ -26,8 +26,7 @@ export default function Courses() {
   return (
     <div className="courses-page">
       <section className="courses-header">
-        <h1>Courses to Build Your Future</h1>
-        <p>Explore practical, career-focused courses in tech, marketing, and more.</p>
+        <h1>ගොඩයන Courses</h1>
 
         <div className="course-search-bar">
           <input

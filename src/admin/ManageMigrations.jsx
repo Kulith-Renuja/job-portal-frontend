@@ -107,14 +107,14 @@ export default function ManageMigrations() {
 
   return (
     <div className="manage-migrations">
-      <h1 className="manage-title">Manage Migrations</h1>
+      <h1 className="manage-title">Manage Visa</h1>
 
       <form className="migration-form" onSubmit={handleSubmit}>
-        <h2>{editingId ? 'Edit Migration' : 'Add New Migration Article'}</h2>
+        <h2>{editingId ? 'Edit Visa Article' : 'Add New Visa Article'}</h2>
         <input
           type="text"
           name="title"
-          placeholder="Migration Title"
+          placeholder="Visa Title"
           value={form.title}
           onChange={handleChange}
           required
@@ -161,7 +161,7 @@ export default function ManageMigrations() {
           + Add Subtitle
         </button>
         <button type="submit" className="submit-btn">
-          {editingId ? 'Update Migration' : 'Add Migration'}
+          {editingId ? 'Update Visa' : 'Add Visa'}
         </button>
         {editingId && (
           <button
@@ -180,7 +180,7 @@ export default function ManageMigrations() {
       <input
         type="text"
         className="search-input"
-        placeholder="Search migrations..."
+        placeholder="Search Visa..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

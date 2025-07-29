@@ -27,8 +27,7 @@ export default function Stories() {
   return (
     <div className="stories-page">
       <section className="stories-header">
-        <h1>Inspirational Stories</h1>
-        <p>Read how people built their careers and changed their lives.</p>
+        <h1>ගොඩයන Stories</h1>
         <div className="story-search-bar">
           <input
             type="text"

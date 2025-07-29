@@ -43,7 +43,7 @@ export default function Dashboard() {
           <p>{stats.courses} Published</p>
         </div>
         <div className="dashboard-card">
-          <h2 className="dashboard-card-title migrations">Migrations</h2>
+          <h2 className="dashboard-card-title migrations">Visa</h2>
           <p>{stats.migrations} Articles</p>
         </div>
         <div className="dashboard-card">

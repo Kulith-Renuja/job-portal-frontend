@@ -27,8 +27,7 @@ export default function Countries() {
   return (
     <div className="countries-page">
       <section className="countries-header">
-        <h1>Explore Migration Opportunities</h1>
-        <p>These are the countries people migrate to most.</p>
+        <h1>ගොඩයන Countries</h1>
 
         <div className="country-search-bar">
           <input

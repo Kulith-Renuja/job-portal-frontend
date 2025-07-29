@@ -197,7 +197,7 @@ function AppLayout() {
           }
         />
         <Route
-          path="/admin/migrations"
+          path="/admin/visa"
           element={
             <AdminRoute>
               <AdminLayout>
