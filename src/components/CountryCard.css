@@ -12,6 +12,11 @@
 
 .country-card:hover {
   transform: translateY(-5px);
+  background:  #0B669A;
+}
+
+.country-card:hover .country-name {
+  color: #ffffff;
 }
 
 .country-flag {

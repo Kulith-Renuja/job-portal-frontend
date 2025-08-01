@@ -39,7 +39,7 @@ export default function CourseDetails() {
         {course.subtitles.map((sub, idx) => (
           <div key={idx} className="subtitle-block">
             <h3>{sub.title}</h3>
-            <p><pre style={{ whiteSpace: 'pre-wrap' }}>{sub.content}</pre></p>
+            <pre style={{ whiteSpace: 'pre-wrap' }}>{sub.content}</pre>
           </div>
         ))}
       </div>

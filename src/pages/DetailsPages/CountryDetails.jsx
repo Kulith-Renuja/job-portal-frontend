@@ -32,7 +32,7 @@ export default function CountryDetails() {
       {country.subtitles && country.subtitles.map((item, index) => (
         <div key={index} className="country-section">
           <h3>{item.title}</h3>
-          <p><pre className='pp' style={{ whiteSpace: 'pre-wrap' }}>{item.content}</pre></p>
+          <pre className='pp' style={{ whiteSpace: 'pre-wrap' }}>{item.content}</pre>
         </div>
       ))}
     </div>

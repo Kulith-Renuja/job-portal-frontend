@@ -21,9 +21,10 @@
   margin-bottom: 1.5rem;
 }
 
-.story-content {
+.story-content pre{
   font-size: 1.05rem;
   line-height: 1.8;
   color: #444;
   font-family: "Courier New", Courier, monospace;
+  line-height: 1.3;
 }

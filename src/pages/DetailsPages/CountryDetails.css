@@ -32,8 +32,9 @@
   margin-bottom: 0.5rem;
 }
 
-.country-section p {
+.country-section pre {
   font-size: 1rem;
   line-height: 1.7;
   color: #000000;
+  font-family: "Courier New", Courier, monospace;
 }

@@ -37,6 +37,7 @@ export default function JobDetails() {
       <p className="job-meta">Salary: {job.salary ? `Rs. ${job.salary}` : 'Negotiable'}</p>
       <p className="job-meta">Deadline: {job.deadline ? new Date(job.deadline).toLocaleDateString() : 'Not mentioned'}</p>
       <br />
+      <h2 className="job-description-title">About the role</h2>
       <div className="job-description">
         <pre style={{ whiteSpace: 'pre-wrap' }}>{job.content}</pre>
       </div>
