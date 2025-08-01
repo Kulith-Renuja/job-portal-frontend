@@ -167,10 +167,18 @@ export default function ManageJobs() {
             <img
               src={form.image instanceof File ? URL.createObjectURL(form.image) : form.image}
               alt="Preview"
-              style={{ width: '150px', height: 'auto', marginTop: '10px' }}
+              style={{ width: '150px', height: 'auto', marginTop: '10px', borderRadius: '8px' }}
             />
+            <button
+              type="button"
+              className="remove-image"
+              onClick={() => setForm((prev) => ({ ...prev, image: '' }))}
+            >
+              ✖ Remove
+            </button>
           </div>
         )}
+
 
         <button type="submit" disabled={loading}>
           {editId ? 'Update Job' : 'Add Job'}

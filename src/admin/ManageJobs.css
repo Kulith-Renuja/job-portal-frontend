@@ -91,9 +91,15 @@
   background-color: #09537c;
 }
 
-.image-preview img {
-  max-width: 100%;
-  border-radius: 6px;
-  margin-top: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+.remove-image {
+  background: #e53935 !important;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }

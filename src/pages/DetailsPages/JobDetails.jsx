@@ -38,7 +38,7 @@ export default function JobDetails() {
       <p className="job-meta">Deadline: {job.deadline ? new Date(job.deadline).toLocaleDateString() : 'Not mentioned'}</p>
       <br />
       <div className="job-description">
-        <p>{job.content}</p>
+        <pre style={{ whiteSpace: 'pre-wrap' }}>{job.content}</pre>
       </div>
       {job.image && <img src={job.image} className="job-image" />}
     </div>

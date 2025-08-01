@@ -37,7 +37,7 @@ export default function MigrationDetails() {
         {migration.subtitles.map((sub, index) => (
           <div key={index} className="subtitle-section">
             <h3>{sub.title}</h3>
-            <p>{sub.content}</p>
+            <p><pre style={{ whiteSpace: 'pre-wrap' }}> {sub.content}</pre></p>
           </div>
         ))}
       </div>

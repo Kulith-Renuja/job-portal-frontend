@@ -33,7 +33,7 @@ export default function StoryDetails() {
         <img src={story.image} alt={story.title} className="story-image" />
       )}
       <div className="story-content">
-        <p>{story.content}</p>
+        <pre style={{ whiteSpace: 'pre-wrap' }}>{story.content}</pre>
       </div>
     </div>
   );
