@@ -128,7 +128,7 @@ export default function ManageCourses() {
 
         {/* 👁️ Optional Preview */}
         {form.image && (
-          <div className="image-preview">
+          <div className="image-preview" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <img
               src={
                 form.image instanceof File
@@ -136,10 +136,18 @@ export default function ManageCourses() {
                   : form.image
               }
               alt="Preview"
-              style={{ width: '150px', marginTop: '10px' }}
+              style={{ width: '150px', height: 'auto', borderRadius: '8px', marginTop: '10px' }}
             />
+            <button
+              type="button"
+              className="remove-image"
+              onClick={() => setForm(prev => ({ ...prev, image: null }))}
+            >
+              ✖ Remove
+            </button>
           </div>
         )}
+
 
         <h3>Subtitles & Content</h3>
         {form.subtitles.map((sub, index) => (

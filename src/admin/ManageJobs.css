@@ -92,13 +92,15 @@
 }
 
 
-.remove-image {
-  background: #e53935 !important;
-  color: white;
+.image-preview .remove-image {
+  top: 5px;
+  right: 5px;
+  background: #e53935;
+  color: rgb(255, 249, 249);
   border: none;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  border-radius: 5px;
+  width: auto;
+  height: auto;
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);

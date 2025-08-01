@@ -133,10 +133,18 @@ export default function ManageCountries() {
                   : form.image
               }
               alt="Preview"
-              style={{ width: '150px', height: 'auto', marginTop: '10px' }}
+              style={{ width: '150px', height: 'auto', marginTop: '10px', borderRadius: '8px' }}
             />
+            <button
+              type="button"
+              className="remove-image"
+              onClick={() => setForm((prev) => ({ ...prev, image: null }))}
+            >
+              ✖ Remove
+            </button>
           </div>
         )}
+
 
         <h3>Subtitles & Content</h3>
         {form.subtitles.map((sub, index) => (

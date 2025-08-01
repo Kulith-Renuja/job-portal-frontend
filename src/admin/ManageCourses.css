@@ -96,3 +96,16 @@ color: white;
 background-color: #0B669A;
 cursor: pointer;
 }
+
+.image-preview button.remove-image {
+  background: #e53935;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 10px;
+  height: fit-content;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
