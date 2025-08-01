@@ -1,81 +1,99 @@
 .manage-jobs {
-padding: 2rem;
+  padding: 2rem;
 }
 
 .manage-title {
-font-size: 1.8rem;
-color: #0B669A;
-margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #0B669A;
+  margin-bottom: 1rem;
 }
 
 .search-input {
-width: 100%;
-max-width: 400px;
-padding: 0.6rem;
-border: 1px solid #ccc;
-border-radius: 8px;
-margin-top: 1.5rem;
-margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .job-list {
-margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .job-row {
-display: flex;
-justify-content: space-between;
-align-items: center;
-background: white;
-padding: 1rem;
-margin-bottom: 0.5rem;
-border-radius: 8px;
-box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .job-actions button {
-margin-left: 0.5rem;
-padding: 0.4rem 1rem;
-border: none;
-border-radius: 6px;
-cursor: pointer;
-background-color: #0B669A;
-color: white;
+  margin-left: 0.5rem;
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #0B669A;
+  color: white;
 }
 
 .job-actions .delete {
-background-color: #e53935;
+  background-color: #e53935;
 }
 
 .job-form {
-background: #fff;
-padding: 1.5rem;
-border-radius: 12px;
-box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-max-width: 600px;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-bottom: 2rem;
 }
 
 .job-form h2 {
-margin-bottom: 1rem;
-color: #0B669A;
+  margin-bottom: 1rem;
+  color: #0B669A;
 }
 
 .job-form input,
-.job-form textarea {
-width: 100%;
-padding: 0.7rem;
-margin-bottom: 1rem;
-border-radius: 6px;
-border: 1px solid #ccc;
-font-size: 1rem;
+.job-form textarea,
+.job-form select {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.job-form input[type="date"] {
+  color: #333;
 }
 
 .job-form button {
-background-color: #0B669A;
-color: white;
-padding: 0.6rem 1.5rem;
-border: none;
-border-radius: 8px;
-font-weight: bold;
-cursor: pointer;
+  background-color: #0B669A;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.job-form button:hover {
+  background-color: #09537c;
+}
+
+.image-preview img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-top: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }

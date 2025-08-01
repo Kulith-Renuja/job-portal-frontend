@@ -145,10 +145,9 @@ export default function Auth() {
             />
             <input
               type="email"
-              placeholder="Email address"
+              placeholder="Email address (optional) "
               value={registerEmail}
               onChange={(e) => setRegisterEmail(e.target.value)}
-              required
             />
             <input
               type="password"

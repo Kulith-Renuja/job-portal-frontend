@@ -30,8 +30,12 @@ export default function JobDetails() {
     <div className="job-details">
       <h1 className="job-title">{job.title}</h1>
       <br />
-      <p className="job-company">Company - {job.company}</p>
-      <p className="job-location">Location - {job.place}</p>
+      <p className="job-company">Company: {job.company || 'Not specified'}</p>
+      <p className="job-location">Location: {job.place || 'N/A'}</p>
+      <p className="job-meta">Category: {job.category}</p>
+      <p className="job-meta">Job Type: {job.jobType || 'N/A'}</p>
+      <p className="job-meta">Salary: {job.salary ? `Rs. ${job.salary}` : 'Negotiable'}</p>
+      <p className="job-meta">Deadline: {job.deadline ? new Date(job.deadline).toLocaleDateString() : 'Not mentioned'}</p>
       <br />
       <div className="job-description">
         <p>{job.content}</p>

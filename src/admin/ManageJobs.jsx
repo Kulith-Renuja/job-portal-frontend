@@ -17,6 +17,9 @@ export default function ManageJobs() {
     place: '',
     company: '',
     category: '',
+    jobType: '',
+    salary: '',
+    deadline: '',
     content: '',
     image: '',
   });
@@ -73,7 +76,7 @@ export default function ManageJobs() {
       }
 
       await loadJobs();
-      setForm({ title: '', place: '', company: '', category: '', content: '', image: '' });
+      setForm({ title: '', place: '', company: '', category: '',jobType: '',salary: '',deadline: '', content: '', image: '' });
       setEditId(null);
     } catch (err) {
       console.error('Failed to submit job', err);
@@ -95,12 +98,15 @@ export default function ManageJobs() {
   const handleEdit = (job) => {
     setEditId(job._id);
     setForm({
-      title: job.title,
-      place: job.place,
-      company: job.company,
-      category: job.category,
-      content: job.content,
-      image: job.image,
+        title: job.title,
+        place: job.place,
+        company: job.company,
+        category: job.category,
+        jobType: job.jobType || '',
+        salary: job.salary || '',
+        deadline: job.deadline ? job.deadline.split('T')[0] : '',
+        content: job.content,
+        image: job.image,
     });
   };
 
@@ -118,9 +124,40 @@ export default function ManageJobs() {
       <form onSubmit={handleSubmit} className="job-form">
         <h2>{editId ? 'Edit Job' : 'Add New Job'}</h2>
         <input type="text" name="title" placeholder="Job Title" value={form.title} onChange={handleChange} required />
-        <input type="text" name="place" placeholder="Location" value={form.place} onChange={handleChange} required />
-        <input type="text" name="company" placeholder="Company" value={form.company} onChange={handleChange} required />
-        <input type="text" name="category" placeholder="Category" value={form.category} onChange={handleChange} required />
+        <input type="text" name="place" placeholder="Location" value={form.place} onChange={handleChange} />
+        <input type="text" name="company" placeholder="Company" value={form.company} onChange={handleChange} />
+        
+        <select name="category" value={form.category} onChange={handleChange} >
+          <option value="">Select Category</option>
+          <option value="IT">IT</option>
+          <option value="Finance">Finance</option>
+          <option value="Management">Management</option>
+        </select>
+
+        <select name="jobType" value={form.jobType} onChange={handleChange} >
+          <option value="">Select Job Type</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+          <option value="Internship">Internship</option>
+          <option value="Contract">Contract</option>
+        </select>
+
+        <input
+          type="number"
+          name="salary"
+          placeholder="Salary"
+          value={form.salary}
+          onChange={handleChange}
+        />
+
+        <input
+          type="date"
+          name="deadline"
+          value={form.deadline}
+          onChange={handleChange}
+        />
+
+
         <textarea name="content" placeholder="Job Description" value={form.content} onChange={handleChange} required />
         <input type="file" name="image" onChange={handleChange} />
 
