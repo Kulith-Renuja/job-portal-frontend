@@ -43,8 +43,8 @@
 }
 
 .subtitle-block pre {
-  font-family: "Times New Roman", Courier, monospace ;
-  font-size: 1.1rem;
-  color: #333;
-  line-height: 1.6;
+   font-family: "Noto Sans Sinhala", sans-serif;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.3;
 }

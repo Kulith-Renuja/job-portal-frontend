@@ -22,9 +22,8 @@
 }
 
 .story-content pre{
-  font-size: 1.05rem;
-  line-height: 1.8;
+  font-family: "Noto Sans Sinhala", sans-serif;
+  font-size: 0.95rem;
   color: #444;
-  font-family: "Courier New", Courier, monospace;
   line-height: 1.3;
 }

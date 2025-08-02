@@ -24,14 +24,14 @@
 
 
 .job-card .job-title {
-  font-size: 1.55rem !important;
+  font-size: 1.3rem !important;
   color: var(--primary);
   font-weight: 600;
   margin-bottom: 0;
 }
 
 .job-card .job-company {
-  font-size: 1rem !important;
+  font-size: 0.95rem !important;
   color: #444;
   margin-bottom: 0rem;
 }
