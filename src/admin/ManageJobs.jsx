@@ -22,6 +22,9 @@ export default function ManageJobs() {
     deadline: '',
     content: '',
     image: '',
+    requiredEducationLevel: '',
+    requiredFieldOfStudy: '',
+    minGraduationYear: ''
   });
   const [editId, setEditId] = useState(null);
 
@@ -76,7 +79,7 @@ export default function ManageJobs() {
       }
 
       await loadJobs();
-      setForm({ title: '', place: '', company: '', category: '',jobType: '',salary: '',deadline: '', content: '', image: '' });
+      setForm({ title: '', place: '', company: '', category: '',jobType: '',salary: '',deadline: '', content: '', image: '', requiredEducationLevel: '', requiredFieldOfStudy: '', minGraduationYear: '' });
       setEditId(null);
     } catch (err) {
       console.error('Failed to submit job', err);
@@ -107,6 +110,9 @@ export default function ManageJobs() {
         deadline: job.deadline ? job.deadline.split('T')[0] : '',
         content: job.content,
         image: job.image,
+        requiredEducationLevel: job.requiredEducationLevel || '',
+        requiredFieldOfStudy: job.requiredFieldOfStudy || '',
+        minGraduationYear: job.minGraduationYear || ''
     });
   };
 
@@ -179,6 +185,34 @@ export default function ManageJobs() {
           </div>
         )}
 
+
+        <h3>Education Requirements</h3>
+        <select name="requiredEducationLevel" value={form.requiredEducationLevel} onChange={handleChange}>
+          <option value="">Select Required Education Level</option>
+          <option value="high-school">High School</option>
+          <option value="diploma">Diploma</option>
+          <option value="bachelor">Bachelor's Degree</option>
+          <option value="master">Master's Degree</option>
+          <option value="doctorate">Doctorate</option>
+        </select>
+        
+        <input
+          type="text"
+          name="requiredFieldOfStudy"
+          placeholder="Required Field of Study (optional)"
+          value={form.requiredFieldOfStudy}
+          onChange={handleChange}
+        />
+        
+        <input
+          type="number"
+          name="minGraduationYear"
+          placeholder="Minimum Graduation Year (optional)"
+          value={form.minGraduationYear}
+          onChange={handleChange}
+          min="1900"
+          max={new Date().getFullYear()}
+        />
 
         <button type="submit" disabled={loading}>
           {editId ? 'Update Job' : 'Add Job'}

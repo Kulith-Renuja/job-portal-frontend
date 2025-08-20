@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(false);
+  const [isCompanyRegistration, setIsCompanyRegistration] = useState(false);
   const [loginPhone, setLoginPhone] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [registerName, setRegisterName] = useState('');
@@ -34,7 +35,6 @@ export default function Auth() {
     login(token, user);
 
     navigate(user.role === 'admin' ? '/admin/dashboard' : '/');
-
 
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
@@ -94,7 +94,8 @@ export default function Auth() {
       <div className="auth-right">
         <h1 className="auth-h1">ජීවිතේම ගොඩයන්න</h1>
         <div className="tabs">
-          <button onClick={() => setIsLogin(false)} className={!isLogin ? 'active' : ''}>Register</button>
+          <button onClick={() => {setIsLogin(false); setIsCompanyRegistration(false);}} className={!isLogin && !isCompanyRegistration ? 'active' : ''}>Register</button>
+          <button onClick={() => {setIsLogin(false); setIsCompanyRegistration(true);}} className={isCompanyRegistration ? 'active' : ''}>Company Register</button>
           <button onClick={() => setIsLogin(true)} className={isLogin ? 'active' : ''}>Login</button>
         </div>
 
@@ -125,6 +126,12 @@ export default function Auth() {
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
+        ) : isCompanyRegistration ? (
+          <div className="auth-form">
+            <h3>Company Registration</h3>
+            <p>Please register your company through our company registration form.</p>
+            <a href="/company-register" className="primary-btn">Register Company</a>
+          </div>
         ) : (
           <form className="auth-form" onSubmit={handleRegister}>
             <h3>Create Account</h3>

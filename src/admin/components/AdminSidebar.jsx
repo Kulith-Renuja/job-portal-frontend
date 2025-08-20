@@ -14,12 +14,11 @@ return (
 <Link to="/admin/visa" className={pathname.includes('migrations') ? 'active' : ''}>Manage Visa</Link>
 <Link to="/admin/stories" className={pathname.includes('stories') ? 'active' : ''}>Manage Stories</Link>
 <Link to="/admin/countries" className={pathname.includes('countries') ? 'active' : ''}>Manage Countries</Link>
+<Link to="/admin/companies" className={pathname.includes('companies') ? 'active' : ''}>Manage Companies</Link>
 <Link to="/admin/users" className={pathname.includes('users') ? 'active' : ''}>Manage Users</Link>
 <Link to="/admin/Account" className={pathname.includes('Account') ? 'active' : ''}>
   My Account
 </Link>
-
-
 
 </nav>
 </aside>

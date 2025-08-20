@@ -1,0 +1,99 @@
+.manage-companies {
+  padding: 2rem;
+}
+
+.manage-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.company-search {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.company-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.company-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+}
+
+.company-info {
+  flex: 1;
+}
+
+.company-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.company-status {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.company-status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.company-status.approved {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.company-status.rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.company-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.company-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.company-actions button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.company-actions button:first-child:hover {
+  background-color: #218838;
+}
+
+.company-actions .reject {
+  background-color: #dc3545;
+  color: white;
+}
+
+.company-actions .reject:hover {
+  background-color: #c82333;
+}

@@ -18,6 +18,8 @@ import About from './pages/About';
 import Auth from './pages/Auth';
 import Migrations from './pages/Migrations';
 import Countries from './pages/Countries';
+import CompanyRegistrationForm from './components/CompanyRegistrationForm';
+import CompanyDashboard from './components/CompanyDashboard';
 
 // Importing details pages
 import JobDetails from './pages/DetailsPages/JobDetails';
@@ -35,6 +37,7 @@ import ManageMigrations from './admin/ManageMigrations';
 import ManageStories from './admin/ManageStories';
 import ManageUsers from './admin/ManageUsers';
 import ManageCountries from './admin/ManageCountries';
+import ManageCompanies from './admin/ManageCompanies';
 
 // Auth Protection Components
 import ProtectedRoute from './components/ProtectedRoute';
@@ -50,120 +53,56 @@ function AppLayout() {
       <Routes>
       {/* Public Routes */}
       <Route path="/auth" element={<Auth />} />
+      <Route path="/company-register" element={<CompanyRegistrationForm />} />
+      
 
-      {/* Protected User Route */}
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-      path="/categories"
-      element={
-      <ProtectedRoute>
-      <Categories />
-      </ProtectedRoute>
-      }
-      />
-      <Route
-      path="/visa"
-      element={
-      <ProtectedRoute>
-      <Migrations />
-      </ProtectedRoute>
-      }
-      />
-      <Route
-      path="/countries"
-      element={
-      <ProtectedRoute>
-      <Countries />
-      </ProtectedRoute>
-      }
-      />
-      <Route
-      path="/jobs"
-      element={
-      <ProtectedRoute>
-      <Jobs />
-      </ProtectedRoute>
-      }
-      />
-      <Route
-      path="/stories"
-      element={
-      <ProtectedRoute>
-      <Stories />
-      </ProtectedRoute>
-      }
-      />
-      <Route
-      path="/courses"
-      element={
-      <ProtectedRoute>
-      <Courses />
-      </ProtectedRoute>
-      }
-      />
-      <Route
-      path="/about"
-      element={
-      <ProtectedRoute>
-      <About />
-      </ProtectedRoute>
-      }
-      />
-      <Route
-      path="/account"
-      element={
-      <ProtectedRoute>
-      <Account />
-      </ProtectedRoute>
-      }
-      />
+      {/* Public Routes */}
+      <Route path="/" element={<Home />} />
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/visa" element={<Migrations />} />
+      <Route path="/countries" element={<Countries />} />
+      <Route path="/jobs" element={<Jobs />} />
+      <Route path="/stories" element={<Stories />} />
+      <Route path="/courses" element={<Courses />} />
+      <Route path="/about" element={<About />} />
       <Route
         path="/jobs/:id"
-        element={
-          <ProtectedRoute>
-            <JobDetails />
-          </ProtectedRoute>
-        }
+        element={<JobDetails />}
       />
       <Route
         path="/courses/:id"
-        element={
-          <ProtectedRoute>
-            <CourseDetails />
-          </ProtectedRoute>
-        }
+        element={<CourseDetails />}
       />
       <Route
         path="/migration/:id"
-        element={
-          <ProtectedRoute>
-            <MigrationDetails />
-          </ProtectedRoute>
-        }
+        element={<MigrationDetails />}
       />
       <Route
         path="/stories/:id"
-        element={
-          <ProtectedRoute>
-            <StoryDetails />
-          </ProtectedRoute>
-        }
+        element={<StoryDetails />}
       />
       <Route
         path="/countries/:id"
+        element={<CountryDetails />}
+      />
+    
+      
+      {/* Protected User Routes */}
+      <Route
+        path="/account"
         element={
           <ProtectedRoute>
-            <CountryDetails />
+            <Account />
           </ProtectedRoute>
         }
       />
+      <Route path="/company-dashboard" element={
+        <ProtectedRoute>
+            <CompanyDashboard />
+          </ProtectedRoute>
+        } 
+      />
+      
       
         {/* Admin Routes (protected) */}
         <Route
@@ -237,9 +176,21 @@ function AppLayout() {
           }
         />
         <Route path="/admin/Account" element={
-            <AdminLayout>
-              <Account />
-            </AdminLayout>
+            <AdminRoute>
+              <AdminLayout>
+                <Account />
+              </AdminLayout>
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/companies"
+          element={
+            <AdminRoute>
+              <AdminLayout>
+                <ManageCompanies />
+              </AdminLayout>
+            </AdminRoute>
           }
         />
               
