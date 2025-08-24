@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+// Note: No change needed here, the existing services are fine.
 import { fetchJobs, createJob, deleteJob, updateJob } from '../services/jobService';
 import { uploadImage } from '../services/uploadService';
 import { getPaymentHistory } from '../services/paymentService';
@@ -37,9 +38,14 @@ export default function CompanyDashboard() {
   const loadJobs = async () => {
     setLoading(true);
     try {
+      // ⭐ The backend now returns all jobs. We still need to filter on the frontend.
+      // This is a temporary solution. A more efficient approach would be to have a
+      // backend endpoint that returns only the jobs for the logged-in company.
       const res = await fetchJobs();
-      // Filter jobs by company ID (in a real app, this would be done on the server)
+      
+      // Filter jobs by company ID
       const companyJobs = res.data.filter(job => job.companyId === user._id);
+      
       const sorted = companyJobs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       setJobs(sorted);
     } catch (err) {
@@ -90,11 +96,11 @@ export default function CompanyDashboard() {
         }
       }
 
+      // ⭐ The backend now automatically pulls companyId and companyName from the auth token.
+      // We don't need to send these fields from the form anymore, which makes it safer.
       const jobData = { 
         ...form, 
-        image: imageUrl,
-        companyId: user._id,
-        company: user.companyName || user.name
+        image: imageUrl
       };
 
       if (editId) {

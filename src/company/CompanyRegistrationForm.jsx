@@ -15,7 +15,9 @@ export default function CompanyRegistrationForm() {
     website: '',
     industry: '',
     companySize: '',
-    description: ''
+    description: '',
+    // ⭐ NEW: Add password to the state
+    password: '' 
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -35,8 +37,10 @@ export default function CompanyRegistrationForm() {
     setError(null);
     
     try {
-      // Submit company registration
-      await registerCompany(formData);
+      // The backend expects password to be in the data
+      await registerCompany({
+        ...formData
+      });
       
       // Show success message
       setSuccess(true);
@@ -44,7 +48,7 @@ export default function CompanyRegistrationForm() {
       // Redirect to login page after 3 seconds
       setTimeout(() => navigate('/auth'), 3000);
     } catch (err) {
-      setError('Failed to register company. Please try again.');
+      setError(err?.response?.data?.message || 'Failed to register company. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -64,6 +68,7 @@ export default function CompanyRegistrationForm() {
       {error && <div className="alert alert-error">{error}</div>}
       
       <form onSubmit={handleSubmit} className="company-registration-form">
+        {/* All your existing fields */}
         <div className="form-group">
           <label htmlFor="companyName">Company Name *</label>
           <input
@@ -199,7 +204,20 @@ export default function CompanyRegistrationForm() {
             required
           />
         </div>
-        
+
+        {/* ⭐ NEW: Add password input field */}
+        <div className="form-group">
+          <label htmlFor="password">Password *</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <button type="submit" className="btn btn-primary" disabled={loading}>
           {loading ? 'Submitting...' : 'Register Company'}
         </button>

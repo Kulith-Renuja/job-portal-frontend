@@ -19,6 +19,9 @@ export default function Account() {
 
   return (
     <div className="account-container">
+      <div>
+        <p>This is admin account</p>
+      </div>
       <div className="account-header">
         <img src={avatar} alt="User Avatar" className="account-avatar" />
         <div className="account-info">

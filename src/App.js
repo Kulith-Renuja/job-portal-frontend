@@ -18,8 +18,11 @@ import About from './pages/About';
 import Auth from './pages/Auth';
 import Migrations from './pages/Migrations';
 import Countries from './pages/Countries';
-import CompanyRegistrationForm from './components/CompanyRegistrationForm';
-import CompanyDashboard from './components/CompanyDashboard';
+
+// Importing company components
+import CompanyRegistrationForm from './company/CompanyRegistrationForm';
+import CompanyDashboard from './company/CompanyDashboard';
+
 
 // Importing details pages
 import JobDetails from './pages/DetailsPages/JobDetails';
@@ -38,10 +41,12 @@ import ManageStories from './admin/ManageStories';
 import ManageUsers from './admin/ManageUsers';
 import ManageCountries from './admin/ManageCountries';
 import ManageCompanies from './admin/ManageCompanies';
+import AdminAccount from './admin/Account';
 
 // Auth Protection Components
-import ProtectedRoute from './components/ProtectedRoute';
-import AdminRoute from './components/AdminRoute';
+import ProtectedRoute from './routes/ProtectedRoute';
+import AdminRoute from './routes/AdminRoute';
+import CompanyRoute from './routes/CompanyRoute';
 
 function AppLayout() {
   const location = useLocation();
@@ -54,7 +59,6 @@ function AppLayout() {
       {/* Public Routes */}
       <Route path="/auth" element={<Auth />} />
       <Route path="/company-register" element={<CompanyRegistrationForm />} />
-      
 
       {/* Public Routes */}
       <Route path="/" element={<Home />} />
@@ -97,11 +101,12 @@ function AppLayout() {
         }
       />
       <Route path="/company-dashboard" element={
-        <ProtectedRoute>
+          <CompanyRoute>
             <CompanyDashboard />
-          </ProtectedRoute>
+          </CompanyRoute>
         } 
       />
+
       
       
         {/* Admin Routes (protected) */}
@@ -178,7 +183,7 @@ function AppLayout() {
         <Route path="/admin/Account" element={
             <AdminRoute>
               <AdminLayout>
-                <Account />
+                <AdminAccount />
               </AdminLayout>
             </AdminRoute>
           }

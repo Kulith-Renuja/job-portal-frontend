@@ -65,11 +65,7 @@ const { isAuthenticated, isCompany } = useAuth();
           <Link to="/courses" onClick={() => setOpen(false)}>Courses</Link>
           <Link to="/about" onClick={() => setOpen(false)}>About</Link>
           {isAuthenticated ? (
-            isCompany ? (
-              <Link to="/company-dashboard" onClick={() => setOpen(false)}>Company Dashboard</Link>
-            ) : (
-              <Link to="/account" onClick={() => setOpen(false)}>Profile</Link>
-            )
+            <Link to="/account" onClick={() => setOpen(false)}>Profile</Link>
           ) : (
             <Link to="/auth" onClick={() => setOpen(false)}>Login</Link>
           )}

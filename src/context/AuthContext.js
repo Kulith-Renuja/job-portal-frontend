@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
 
   const isAdmin = user?.role === 'admin';
   const isAuthenticated = !!token;
-  const isCompany = user?.userType === 'company';
+  const isCompany = user?.role === 'company';
 
   return (
     <AuthContext.Provider
