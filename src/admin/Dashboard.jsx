@@ -10,6 +10,7 @@ export default function Dashboard() {
     migrations: 0,
     stories: 0,
     countries: 0,
+    companies: 0, // ✅ added
   });
 
   useEffect(() => {
@@ -37,6 +38,10 @@ export default function Dashboard() {
         <div className="dashboard-card">
           <h2 className="dashboard-card-title users">Users</h2>
           <p>{stats.users} Registered</p>
+        </div>
+        <div className="dashboard-card">
+          <h2 className="dashboard-card-title companies">Companies</h2>
+          <p>{stats.companies} Registered</p>
         </div>
         <div className="dashboard-card">
           <h2 className="dashboard-card-title courses">Courses</h2>

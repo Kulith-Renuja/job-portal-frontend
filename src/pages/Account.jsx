@@ -1,15 +1,19 @@
 // src/pages/Account.jsx
+import { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './Account.css';
-import avatar from '../assets/avatar.png'; // Your static user image
+import avatar from '../assets/avatar.png';
 
 export default function Account() {
-  // We're now also getting the 'isCompany' flag from the AuthContext.
-  const { user, logout, isCompany } = useAuth();
+  const { user, logout, isCompany, refreshUser } = useAuth();
   const navigate = useNavigate();
 
-  // Return a loading state if the user object is not yet available.
+  // Fetch fresh profile on mount
+  useEffect(() => {
+    refreshUser();
+  }, [refreshUser]);
+
   if (!user) {
     return <div>Loading user data...</div>;
   }
@@ -22,19 +26,17 @@ export default function Account() {
   const goToCompanyDashboard = () => {
     navigate('/company-dashboard');
   };
-  
-    const resetPassword = async () => {
+
+  const resetPassword = async () => {
     try {
-      // Show a confirmation message to the user
-      const confirmed = window.confirm("A password reset link will be sent to your email. Do you want to continue?");
+      const confirmed = window.confirm(
+        "A password reset link will be sent to your email. Do you want to continue?"
+      );
       if (!confirmed) return;
 
-      // Make a POST request to your backend API endpoint
       const response = await fetch('/api/reset-password-request', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: user.email }),
       });
 
@@ -50,11 +52,14 @@ export default function Account() {
     }
   };
 
-  const joinDate = new Date(parseInt(user?._id.substring(0, 8), 16) * 1000).toLocaleDateString('en-US', {
-    year: 'numeric', month: 'long', day: 'numeric'
+  const joinDate = new Date(
+    parseInt(user?._id.substring(0, 8), 16) * 1000
+  ).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
 
-  // Helper function to get the appropriate CSS class for the company status badge
   const getStatusClass = (status) => {
     switch (status) {
       case 'approved':
@@ -73,19 +78,17 @@ export default function Account() {
       <div className="account-header">
         <img src={avatar} alt="User Avatar" className="account-avatar" />
         <div className="account-info">
-          {/* This title will always be the user's name as requested */}
           <h2>{user?.name}</h2>
           <p>Member since {joinDate}</p>
           <div className="account-actions">
-            {/* Conditionally show either the 'Reset Password' or 'Company Dashboard' button */}
             {isCompany ? (
               <>
-              <button className="dashboard-btn" onClick={goToCompanyDashboard}>
-                💼 Company Dashboard
-              </button>
-              <button className="reset-btn" onClick={resetPassword}>
-                🔑 Reset Password
-              </button>
+                <button className="dashboard-btn" onClick={goToCompanyDashboard}>
+                  💼 Company Dashboard
+                </button>
+                <button className="reset-btn" onClick={resetPassword}>
+                  🔑 Reset Password
+                </button>
               </>
             ) : (
               <button className="reset-btn" onClick={resetPassword}>
@@ -98,8 +101,6 @@ export default function Account() {
           </div>
         </div>
       </div>
-      
-      {/* Conditionally render the company-specific details block below the main user info */}
 
       {isCompany ? (
         <div className="company-details">
@@ -133,14 +134,14 @@ export default function Account() {
               <span>📞</span>
               <div>
                 <p className="label">Contact Phone</p>
-                <p>{user.phone}</p>
+                <p>{user.contactPhone || 'N/A'}</p>
               </div>
             </div>
             <div className="contact-card">
               <span>📧</span>
               <div>
                 <p className="label">Contact Email</p>
-                <p>{user.email}</p>
+                <p>{user.contactEmail || 'N/A'}</p>
               </div>
             </div>
             <div className="contact-card">
@@ -171,25 +172,25 @@ export default function Account() {
           </div>
         </div>
       ) : (
-      <div className="account-contact">
-        <h3>Contact Information</h3>
-        <div className="contact-grid">
-          <div className="contact-card">
-            <span>📧</span>
-            <div>
-              <p className="label">Email Address</p>
-              <p>{user?.email}</p>
+        <div className="account-contact">
+          <h3>Contact Information</h3>
+          <div className="contact-grid">
+            <div className="contact-card">
+              <span>📧</span>
+              <div>
+                <p className="label">Email Address</p>
+                <p>{user?.email}</p>
+              </div>
             </div>
-          </div>
-          <div className="contact-card">
-            <span>📞</span>
-            <div>
-              <p className="label">Phone Number</p>
-              <p>{user?.phone}</p>
+            <div className="contact-card">
+              <span>📞</span>
+              <div>
+                <p className="label">Phone Number</p>
+                <p>{user?.phone}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       )}
     </div>
   );
