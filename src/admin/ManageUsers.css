@@ -74,3 +74,30 @@
 .user-actions .flag {
   background-color: #f59e0b;
 }
+
+.role-filters {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.chip {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: #f8f9fa;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.chip:hover {
+  background: #e2e6ea;
+}
+
+.chip.active {
+  background: #0b669a;
+  color: #fff;
+  border-color: #0b669a;
+}

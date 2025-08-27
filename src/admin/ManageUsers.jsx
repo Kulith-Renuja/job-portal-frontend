@@ -4,6 +4,7 @@ import { fetchUsers, updateUserStatus } from '../services/userService';
 
 export default function ManageUsers() {
   const [search, setSearch] = useState('');
+  const [roleFilter, setRoleFilter] = useState('all'); // all | admin | user | company
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -30,16 +31,27 @@ export default function ManageUsers() {
     }
   };
 
-  const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(search.toLowerCase()) ||
-    user.email.toLowerCase().includes(search.toLowerCase()) ||
-    user.phone.includes(search)
-  );
+  const matchesSearch = (user) => {
+    const s = search.toLowerCase();
+    return (
+      user.name?.toLowerCase().includes(s) ||
+      user.email?.toLowerCase().includes(s) ||
+      user.phone?.includes(s)
+    );
+  };
+
+  const matchesRole = (user) => {
+    if (roleFilter === 'all') return true;
+    return user.role === roleFilter;
+  };
+
+  const filteredUsers = users.filter(user => matchesSearch(user) && matchesRole(user));
 
   return (
     <div className="manage-users">
       <h1 className="manage-title">Manage Users</h1>
 
+      {/* Search bar */}
       <input
         type="text"
         className="user-search"
@@ -48,6 +60,35 @@ export default function ManageUsers() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
+      {/* Role filter buttons */}
+      <div className="role-filters">
+        <button
+          className={`chip ${roleFilter === 'all' ? 'active' : ''}`}
+          onClick={() => setRoleFilter('all')}
+        >
+          All
+        </button>
+        <button
+          className={`chip ${roleFilter === 'user' ? 'active' : ''}`}
+          onClick={() => setRoleFilter('user')}
+        >
+          Normal Users
+        </button>
+        <button
+          className={`chip ${roleFilter === 'company' ? 'active' : ''}`}
+          onClick={() => setRoleFilter('company')}
+        >
+          Companies
+        </button>
+        <button
+          className={`chip ${roleFilter === 'admin' ? 'active' : ''}`}
+          onClick={() => setRoleFilter('admin')}
+        >
+          Admins
+        </button>
+      </div>
+
+      {/* User list */}
       <div className="user-list">
         {filteredUsers.map(user => (
           <div key={user._id} className="user-row">
@@ -55,6 +96,7 @@ export default function ManageUsers() {
               <p className="user-name">{user.name}</p>
               <p>{user.email}</p>
               <p>{user.phone}</p>
+              <p className="user-role">Role: {user.role}</p>
               <p className={`user-status ${user.status || 'active'}`}>
                 Status: {user.status || 'active'}
               </p>

@@ -1,4 +1,5 @@
 import API from '../api/axios';
 
 export const fetchCompanies = () => API.get('/companies');
-export const updateCompanyStatus = (id, status) => API.put(`/companies/${id}`, { status });
+// Align payload name with backend: { companyStatus: 'approved' | 'rejected' | 'pending' }
+export const updateCompanyStatus = (id, companyStatus) =>API.put(`/companies/${id}`, { companyStatus });
