@@ -4,6 +4,7 @@ import logo from '../assets/login-logo.png';
 import { loginUser, registerUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(false);
@@ -130,7 +131,7 @@ export default function Auth() {
           <div className="auth-form">
             <h3>Company Registration</h3>
             <p>Please register your company through our company registration form.</p>
-            <a href="/company-register" className="primary-btn">Register Company</a>
+            <Link to="/company-register" className="primary-btn">Register Company</Link>
           </div>
         ) : (
           <form className="auth-form" onSubmit={handleRegister}>
