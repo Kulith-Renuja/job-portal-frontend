@@ -1,53 +1,21 @@
 import API from '../api/axios';
-import { sendApplicationNotification, sendApplicationConfirmation } from './emailService';
 
-export const submitJobApplication = async (jobId, applicationData) => {
-  const formData = new FormData();
-  
-  // Append all application data to FormData
-  Object.keys(applicationData).forEach(key => {
-    if (key === 'cv' && applicationData[key]) {
-      // Handle file upload
-      formData.append(key, applicationData[key]);
-    } else if (key === 'education' && typeof applicationData[key] === 'object') {
-      // Handle nested education object
-      Object.keys(applicationData[key]).forEach(eduKey => {
-        formData.append(`education[${eduKey}]`, applicationData[key][eduKey]);
-      });
-    } else if (applicationData[key] !== null && applicationData[key] !== undefined) {
-      formData.append(key, applicationData[key]);
-    }
-  });
-  
-  // Append job ID
-  formData.append('jobId', jobId);
-  
-  // Submit application
-  const response = await API.post('/applications', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  });
-  
-  // Send emails (in a real implementation, this would be done on the server)
-  // For now, we'll simulate it on the client side
-  /*
-  if (response.data.companyEmail) {
-    await sendApplicationNotification(response.data.companyEmail, applicationData);
-  }
-  
-  if (applicationData.email) {
-    await sendApplicationConfirmation(applicationData.email, response.data.job);
-  }
-  */
-  
-  return response;
-};
+export const submitJobApplication = async (jobId, form) => {
+const fd = new FormData();
+fd.append('jobId', jobId);
+fd.append('name', form.name);
+fd.append('email', form.email);
+fd.append('phone', form.phone);
+fd.append('experience', form.experience || 0);
+fd.append('coverLetter', form.coverLetter || '');
 
-export const getJobApplications = (jobId) => {
-  return API.get(`/applications/job/${jobId}`);
-};
+// nested education
+fd.append('education[level]', form.education.level);
+fd.append('education[institution]', form.education.institution);
+fd.append('education[fieldOfStudy]', form.education.fieldOfStudy);
+fd.append('education[graduationYear]', form.education.graduationYear);
 
-export const getFilteredApplications = (companyId) => {
-  return API.get(`/applications/company/${companyId}/filtered`);
+if (form.cv) fd.append('cv', form.cv);
+
+return API.post('/applications', fd); // backend handles filtering and emails
 };
