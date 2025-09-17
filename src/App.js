@@ -55,113 +55,85 @@ function AppLayout() {
       <Route
         path="/"
         element={
-          <ProtectedRoute>
             <Home />
-          </ProtectedRoute>
         }
       />
       <Route
       path="/categories"
       element={
-      <ProtectedRoute>
       <Categories />
-      </ProtectedRoute>
       }
       />
       <Route
       path="/visa"
       element={
-      <ProtectedRoute>
       <Migrations />
-      </ProtectedRoute>
       }
       />
       <Route
       path="/countries"
       element={
-      <ProtectedRoute>
       <Countries />
-      </ProtectedRoute>
       }
       />
       <Route
       path="/jobs"
       element={
-      <ProtectedRoute>
       <Jobs />
-      </ProtectedRoute>
       }
       />
       <Route
       path="/stories"
       element={
-      <ProtectedRoute>
       <Stories />
-      </ProtectedRoute>
       }
       />
       <Route
       path="/courses"
       element={
-      <ProtectedRoute>
       <Courses />
-      </ProtectedRoute>
       }
       />
       <Route
       path="/about"
       element={
-      <ProtectedRoute>
       <About />
-      </ProtectedRoute>
       }
       />
       <Route
       path="/account"
       element={
-      <ProtectedRoute>
       <Account />
-      </ProtectedRoute>
       }
       />
       <Route
         path="/jobs/:id"
         element={
-          <ProtectedRoute>
             <JobDetails />
-          </ProtectedRoute>
         }
       />
       <Route
         path="/courses/:id"
         element={
-          <ProtectedRoute>
             <CourseDetails />
-          </ProtectedRoute>
         }
       />
       <Route
         path="/migration/:id"
         element={
-          <ProtectedRoute>
             <MigrationDetails />
-          </ProtectedRoute>
         }
       />
       <Route
         path="/stories/:id"
         element={
-          <ProtectedRoute>
             <StoryDetails />
-          </ProtectedRoute>
         }
       />
       <Route
         path="/countries/:id"
         element={
-          <ProtectedRoute>
             <CountryDetails />
-          </ProtectedRoute>
         }
       />
       

@@ -1,8 +1,17 @@
 import axios from 'axios';
 
 // CRA uses REACT_APP_ prefix for env variables
+
+
+
+
+/* 
 const API = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api/v1',
+    baseURL: 'http://localhost:5000/api/v1',
+});
+*/
+const API = axios.create({
+    baseURL: process.env.REACT_APP_API_URL ,
 });
 
 API.interceptors.request.use((req) => {
