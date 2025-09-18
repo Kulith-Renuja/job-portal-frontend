@@ -103,7 +103,9 @@ function AppLayout() {
       <Route
       path="/account"
       element={
+      <ProtectedRoute>
       <Account />
+      </ProtectedRoute>
       }
       />
       <Route

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext'; //
 import './Header.css';
 
 export default function Header() {
@@ -7,6 +8,7 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navRef = useRef(null); // for mobile menu
+  const { isAuthenticated } = useAuth(); // 
 
   const toggleMenu = () => setOpen(!open);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
@@ -62,7 +64,11 @@ export default function Header() {
           <Link to="/jobs" onClick={() => setOpen(false)}>Jobs</Link>
           <Link to="/courses" onClick={() => setOpen(false)}>Courses</Link>
           <Link to="/about" onClick={() => setOpen(false)}>About</Link>
-          <Link to="/account" onClick={() => setOpen(false)}>Profile</Link>
+          {isAuthenticated ? (
+            <Link to="/account" onClick={() => setOpen(false)}>Profile</Link>
+          ) : (
+            <Link to="/auth" onClick={() => setOpen(false)}>Login</Link>
+          )}
         </nav>
       </div>
     </header>
