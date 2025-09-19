@@ -4,6 +4,7 @@ import logo from '../assets/login-logo.png';
 import { loginUser, registerUser } from '../services/authService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { FaEye, FaEyeSlash } from "react-icons/fa";  // 👁️ import icons
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(false);
@@ -17,6 +18,11 @@ export default function Auth() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // 👁️ states for show/hide
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+
   const navigate = useNavigate();
   const { login } = useAuth(); 
 
@@ -27,15 +33,13 @@ export default function Auth() {
     setLoading(true);
 
     try {
-    const res = await loginUser({ phone: loginPhone, password: loginPassword });
-    const { token, ...user } = res.data;
+      const res = await loginUser({ phone: loginPhone, password: loginPassword });
+      const { token, ...user } = res.data;
 
-    // ✅ Update context + localStorage
-    login(token, user);
+      // ✅ Update context + localStorage
+      login(token, user);
 
-    navigate(user.role === 'admin' ? '/admin/dashboard' : '/');
-
-
+      navigate(user.role === 'admin' ? '/admin/dashboard' : '/');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {
@@ -53,27 +57,34 @@ export default function Auth() {
       return;
     }
 
+    if (!validatePassword(registerPassword)) {
+      setError("Password must be at least 6 characters and include uppercase, lowercase, number, and special character.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await registerUser({
-      name: registerName,
-      email: registerEmail,
-      phone: registerPhone,
-      password: registerPassword,
-    });
+        name: registerName,
+        email: registerEmail,
+        phone: registerPhone,
+        password: registerPassword,
+      });
 
-    const { token, ...user } = res.data;
-
-    // ✅ Update context
-    login(token, user);
-
-    navigate(user.role === 'admin' ? '/admin/dashboard' : '/');
-
+      const { token, ...user } = res.data;
+      login(token, user);
+      navigate(user.role === 'admin' ? '/admin/dashboard' : '/');
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
+  };
+
+  // ✅ Password validation regex
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{6,}$/;
+    return regex.test(password);
   };
 
   return (
@@ -100,6 +111,7 @@ export default function Auth() {
 
         {error && <p className="error-text">{error}</p>}
         {isLogin ? (
+          // 🔐 Login Form
           <form className="auth-form" onSubmit={handleLogin}>
             <h3>Welcome Back</h3>
             <p>Sign in to your account to continue</p>
@@ -110,13 +122,18 @@ export default function Auth() {
               onChange={(e) => setLoginPhone(e.target.value)}
               required
             />
-            <input
-              type="password"
-              placeholder="Password"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-              required
-            />
+            <div className="password-wrapper">
+              <input
+                type={showLoginPassword ? "text" : "password"}
+                placeholder="Password"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                required
+              />
+              <span className="eye-icon" onClick={() => setShowLoginPassword(!showLoginPassword)}>
+                {showLoginPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
             <div className="form-options">
               <label><input type="checkbox" /> Remember me</label>
               <a href="#">Forgot Password?</a>
@@ -126,6 +143,7 @@ export default function Auth() {
             </button>
           </form>
         ) : (
+          // 📝 Register Form
           <form className="auth-form" onSubmit={handleRegister}>
             <h3>Create Account</h3>
             <p>Sign up to get started</p>
@@ -145,24 +163,36 @@ export default function Auth() {
             />
             <input
               type="email"
-              placeholder="Email address (optional) "
+              placeholder="Email address (optional)"
               value={registerEmail}
               onChange={(e) => setRegisterEmail(e.target.value)}
             />
-            <input
-              type="password"
-              placeholder="Password"
-              value={registerPassword}
-              onChange={(e) => setRegisterPassword(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              value={registerConfirm}
-              onChange={(e) => setRegisterConfirm(e.target.value)}
-              required
-            />
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={registerPassword}
+                onChange={(e) => setRegisterPassword(e.target.value)}
+                required
+              />
+              <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
+
+            <div className="password-wrapper">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                value={registerConfirm}
+                onChange={(e) => setRegisterConfirm(e.target.value)}
+                required
+              />
+              <span className="eye-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
+
             <button className="primary-btn" disabled={loading}>
               {loading ? 'Registering...' : 'Register'}
             </button>
