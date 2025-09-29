@@ -174,3 +174,121 @@
 .eye-icon:hover {
   color: #000; /* darker on hover */
 }
+
+.form-wrapper {
+  width: 100%;
+  max-width: 400px; /* keeps forms compact */
+  margin: 0 auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* scrollable container */
+.scroll-frame {
+  max-height: 480px;   /* adjust for your layout */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #ccc transparent;
+}
+
+/* Chrome/Edge scrollbar */
+.scroll-frame::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-frame::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-frame::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+
+.tabs_2 {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tabs_2 button {
+  flex: 1; /* make them equal width */
+  max-width: 160px;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  background: #f3f4f6;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #374151;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effect: blur/glow */
+.tabs_2 button:hover {
+  background: #0B669A;
+  color: white;
+  box-shadow: 0 0 15px rgba(11, 102, 154, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Active state (selected tab) */
+.tabs_2 .active {
+  background: linear-gradient(135deg, #0B669A, #0e8ac8);
+  color: white;
+  box-shadow: 0 0 20px rgba(11, 102, 154, 0.6);
+}
+
+/* Scrollbar styling (for Chrome, Edge, Safari) */
+.auth-form::-webkit-scrollbar {
+  width: 8px;
+}
+.auth-form::-webkit-scrollbar-track {
+  background: #f0f4f8; /* light gray */
+  border-radius: 10px;
+}
+.auth-form::-webkit-scrollbar-thumb {
+  background: #0B669A; /* brand blue */
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+.auth-form::-webkit-scrollbar-thumb:hover {
+  background: #0e8ac8; /* brighter on hover */
+}
+
+/* Scrollbar styling (Firefox) */
+.auth-form {
+  scrollbar-width: thin;
+  scrollbar-color: #0B669A #f0f4f8;
+}
+
+/* Style for selects (Industry & Company Size) */
+.auth-form select {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  background: white;
+  appearance: none; /* remove native arrow */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%230B669A' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover + focus states */
+.auth-form select:hover,
+.auth-form select:focus {
+  border-color: #0B669A;
+  box-shadow: 0 0 8px rgba(11, 102, 154, 0.3);
+  outline: none;
+}
