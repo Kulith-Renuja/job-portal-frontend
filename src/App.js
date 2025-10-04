@@ -30,6 +30,7 @@ import ManageMigrations from './admin/ManageMigrations';
 import ManageStories from './admin/ManageStories';
 import ManageUsers from './admin/ManageUsers';
 import ManageCountries from './admin/ManageCountries';
+import CompanyAdds from './company/CompanyAdds';
 
 // Company
 import CompanyLayout from "./company/CompanyLayout";
@@ -37,6 +38,7 @@ import CompanyDashboard from "./company/CompanyDashboard";
 import CompanyJobs from "./company/CompanyJobs";
 import CompanyProfile from "./company/CompanyProfile";
 import CompanyRoute from "./company/CompanyRoute";
+
 
 // Auth protection
 import ProtectedRoute from './components/ProtectedRoute';
@@ -95,6 +97,7 @@ function AppLayout() {
           <Route path="dashboard" element={<CompanyDashboard />} />
           <Route path="jobs" element={<CompanyJobs />} />
           <Route path="profile" element={<CompanyProfile />} />
+          <Route path="adds" element={<CompanyAdds />} />
         </Route>
       </Routes>
 

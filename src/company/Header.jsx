@@ -50,9 +50,13 @@ export default function CompanyHeader() {
           <Link to="/company/jobs" onClick={() => setOpen(false)}>
             Jobs
           </Link>
+          <Link to="/company/adds" onClick={() => setOpen(false)}>
+            Adds
+          </Link>
           <Link to="/company/profile" onClick={() => setOpen(false)}>
             Profile
           </Link>
+          
         </nav>
       </div>
     </header>

@@ -9,13 +9,13 @@ const categories = [
   {
     name: 'ගොඩයන Jobs',
     image: Jobs,
-    path: '/jobs',
+    path: '/company/jobs',
     description: 'Find your dream career opportunities'
   },
   {
     name: 'ගොඩයන Adds',
     image: Migration,
-    path: '/visa',
+    path: '/company/adds',
     description: 'Your pathway to global opportunities'
   }
 ];
