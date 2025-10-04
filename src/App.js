@@ -31,13 +31,23 @@ import ManageStories from './admin/ManageStories';
 import ManageUsers from './admin/ManageUsers';
 import ManageCountries from './admin/ManageCountries';
 
+// Company
+import CompanyLayout from "./company/CompanyLayout";
+import CompanyDashboard from "./company/CompanyDashboard";
+import CompanyJobs from "./company/CompanyJobs";
+import CompanyProfile from "./company/CompanyProfile";
+import CompanyRoute from "./company/CompanyRoute";
+
 // Auth protection
 import ProtectedRoute from './components/ProtectedRoute';
-import AdminRoute from './components/AdminRoute';
+import AdminRoute from './admin/AdminRoute';
 
 function AppLayout() {
   const location = useLocation();
-  const hideLayout = location.pathname === '/auth' || location.pathname.startsWith('/admin');
+  const hideLayout =
+    location.pathname === "/auth" ||
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/company");
 
   return (
     <>
@@ -72,6 +82,20 @@ function AppLayout() {
         <Route path="/admin/users" element={<AdminRoute><AdminLayout><ManageUsers /></AdminLayout></AdminRoute>} />
         <Route path="/admin/countries" element={<AdminRoute><AdminLayout><ManageCountries /></AdminLayout></AdminRoute>} />
         <Route path="/admin/account" element={<AdminLayout><Account /></AdminLayout>} />
+
+        {/* Company routes */}
+        <Route
+          path="/company"
+          element={
+            <CompanyRoute>
+              <CompanyLayout />
+            </CompanyRoute>
+          }
+        >
+          <Route path="dashboard" element={<CompanyDashboard />} />
+          <Route path="jobs" element={<CompanyJobs />} />
+          <Route path="profile" element={<CompanyProfile />} />
+        </Route>
       </Routes>
 
       {!hideLayout && <Footer />}
