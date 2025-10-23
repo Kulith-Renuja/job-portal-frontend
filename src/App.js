@@ -38,7 +38,7 @@ import CompanyDashboard from "./company/CompanyDashboard";
 import CompanyJobs from "./company/CompanyJobs";
 import CompanyProfile from "./company/CompanyProfile";
 import CompanyRoute from "./company/CompanyRoute";
-
+import CompanyJobPost from "./company/CompanyJobPost";
 
 // Auth protection
 import ProtectedRoute from './components/ProtectedRoute';
@@ -98,6 +98,7 @@ function AppLayout() {
           <Route path="jobs" element={<CompanyJobs />} />
           <Route path="profile" element={<CompanyProfile />} />
           <Route path="adds" element={<CompanyAdds />} />
+          <Route path="post-job" element={<CompanyJobPost />} />
         </Route>
       </Routes>
 
