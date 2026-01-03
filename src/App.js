@@ -5,12 +5,12 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Categories from './pages/Categories';
-import Jobs from './pages/Jobs';
+// import Jobs from './pages/Jobs';
 import Stories from './pages/Stories';
 import Courses from './pages/Courses';
-import Account from './pages/Account';
+// import Account from './pages/Account';
 import About from './pages/About';
-import Auth from './pages/Auth';
+// import Auth from './pages/Auth';
 import Migrations from './pages/Migrations';
 import Countries from './pages/Countries';
 
@@ -19,9 +19,10 @@ import JobDetails from './pages/DetailsPages/JobDetails';
 import CourseDetails from './pages/DetailsPages/CourseDetails';
 import MigrationDetails from './pages/DetailsPages/MigrationDetails';
 import StoryDetails from './pages/DetailsPages/StoryDetails';
-import CountryDetails from './pages/DetailsPages/CountryDetails';
+import CountryDetails from './pages/DetailsPages/CountryDetails'; 
 
 // Admin
+/*
 import AdminLayout from './admin/AdminLayout';
 import Dashboard from './admin/Dashboard';
 import ManageJobs from './admin/ManageJobs';
@@ -30,19 +31,24 @@ import ManageMigrations from './admin/ManageMigrations';
 import ManageStories from './admin/ManageStories';
 import ManageUsers from './admin/ManageUsers';
 import ManageCountries from './admin/ManageCountries';
-import CompanyAdds from './company/CompanyAdds';
+import CompanyAdds from './company/CompanyAdds'; 
+*/
 
 // Company
+/*
 import CompanyLayout from "./company/CompanyLayout";
 import CompanyDashboard from "./company/CompanyDashboard";
 import CompanyJobs from "./company/CompanyJobs";
 import CompanyProfile from "./company/CompanyProfile";
 import CompanyRoute from "./company/CompanyRoute";
 import CompanyJobPost from "./company/CompanyJobPost";
+*/
 
 // Auth protection
+/*
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './admin/AdminRoute';
+*/
 
 function AppLayout() {
   const location = useLocation();
@@ -57,16 +63,18 @@ function AppLayout() {
 
       <Routes>
         {/* Public routes */}
-        <Route path="/auth" element={<Auth />} />
         <Route path="/" element={<Home />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/visa" element={<Migrations />} />
         <Route path="/countries" element={<Countries />} />
-        <Route path="/jobs" element={<Jobs />} />
         <Route path="/stories" element={<Stories />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/about" element={<About />} />
+        {/*
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+        */}
 
         {/* Detail routes */}
         <Route path="/jobs/:id" element={<JobDetails />} />
@@ -76,6 +84,7 @@ function AppLayout() {
         <Route path="/countries/:id" element={<CountryDetails />} />
 
         {/* Admin routes */}
+        {/*
         <Route path="/admin/dashboard" element={<AdminRoute><AdminLayout><Dashboard /></AdminLayout></AdminRoute>} />
         <Route path="/admin/jobs" element={<AdminRoute><AdminLayout><ManageJobs /></AdminLayout></AdminRoute>} />
         <Route path="/admin/courses" element={<AdminRoute><AdminLayout><ManageCourses /></AdminLayout></AdminRoute>} />
@@ -84,23 +93,20 @@ function AppLayout() {
         <Route path="/admin/users" element={<AdminRoute><AdminLayout><ManageUsers /></AdminLayout></AdminRoute>} />
         <Route path="/admin/countries" element={<AdminRoute><AdminLayout><ManageCountries /></AdminLayout></AdminRoute>} />
         <Route path="/admin/account" element={<AdminLayout><Account /></AdminLayout>} />
+        */}
 
         {/* Company routes */}
-        <Route
-          path="/company"
-          element={
-            <CompanyRoute>
-              <CompanyLayout />
-            </CompanyRoute>
-          }
-        >
+        {/*
+        <Route path="/company" element={<CompanyRoute><CompanyLayout /></CompanyRoute>}>
           <Route path="dashboard" element={<CompanyDashboard />} />
           <Route path="jobs" element={<CompanyJobs />} />
           <Route path="profile" element={<CompanyProfile />} />
           <Route path="adds" element={<CompanyAdds />} />
           <Route path="post-job" element={<CompanyJobPost />} />
         </Route>
+        */}
       </Routes>
+      
 
       {!hideLayout && <Footer />}
     </>

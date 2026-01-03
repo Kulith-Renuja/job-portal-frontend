@@ -4,36 +4,20 @@ export default function About() {
   return (
     <div className="about-page">
       <section className="about-hero">
-        <h1>About JobPortal</h1>
+        <h1>About Godayana.lk</h1>
+        <br />
         <p>
-          JobPortal is a modern platform that connects job seekers with the right career opportunities.
-          Our mission is to empower individuals to reach their full potential by making job discovery fast,
-          relevant, and reliable.
+          Godayana.lk is a Sri Lankan knowledge platform created to provide clear, honest, and practical information about migration, visas, countries, and migration-related courses for Sri Lankans.
         </p>
-      </section>
-
-      <section className="about-stats">
-        <div className="stat-card">
-          <h2>50K+</h2>
-          <p>Active Jobs</p>
-        </div>
-        <div className="stat-card">
-          <h2>10K+</h2>
-          <p>Companies</p>
-        </div>
-        <div className="stat-card">
-          <h2>100K+</h2>
-          <p>Success Stories</p>
-        </div>
+        <br />
       </section>
 
       <section className="about-values">
-        <h2>Why Choose Us</h2>
         <ul>
-          <li>🔍 Easy and fast job search with category filters</li>
-          <li>📱 Mobile-friendly and user-centric design</li>
-          <li>🛡️ Secure and reliable user accounts</li>
-          <li>📢 Real-time job posting from verified companies</li>
+          <li> 🟦 Start Your Journey with Knowledge</li>
+          <li> 🟦 Migration is a life-changing decision. Before you apply, pay, or commit — learn first.</li>
+          <li> 🟦 Explore our guides, understand your options, and prepare yourself with the right knowledge.</li>
+          <li> 🟦 Godayana.lk - Knowledge First. Decisions Next.</li>
         </ul>
       </section>
     </div>

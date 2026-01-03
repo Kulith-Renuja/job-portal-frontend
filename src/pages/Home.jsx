@@ -49,19 +49,20 @@ export default function Home() {
     loadData();
   }, []);
 
-  const handleSearch = () => {
+  /*const handleSearch = () => {
     if (search.trim()) {
       navigate(`/jobs?search=${encodeURIComponent(search)}`);
     } else {
       navigate('/jobs');
     }
-  };
+  };*/
 
   return (
     <div className="home-page">
       <section className="hero">
         <h1>ජීවිතේම ගොඩයන්න</h1>
         <p>ලංකාවේ විශ්වාසවන්තම ඩිජිටල් අවකාශය.</p>
+        {/*
         <div className="search-bar">
           <input
             type="text"
@@ -72,6 +73,7 @@ export default function Home() {
           />
           <button className="search-button" onClick={handleSearch}>Search</button>
         </div>
+        */}
       </section>
 
       <Categories />
@@ -87,7 +89,8 @@ export default function Home() {
           <MoreButton to="/countries" />
         </div>
       </section>
-
+      
+      {/*
       <section className="job-listings">
         <h2 className="section-title">ගොඩයන Jobs</h2>
         <div className="job-grid">
@@ -97,6 +100,7 @@ export default function Home() {
         </div>
         <MoreButton to="/jobs" />
       </section>
+      */}
 
       <section className="courses">
         <h2 className="section-title">ගොඩයන Courses</h2>

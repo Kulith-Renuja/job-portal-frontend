@@ -61,14 +61,14 @@ export default function Header() {
             )}
           </div>
 
-          <Link to="/jobs" onClick={() => setOpen(false)}>Jobs</Link>
+          {/*<Link to="/jobs" onClick={() => setOpen(false)}>Jobs</Link>*/}
           <Link to="/courses" onClick={() => setOpen(false)}>Courses</Link>
           <Link to="/about" onClick={() => setOpen(false)}>About</Link>
-          {isAuthenticated ? (
+          {/*{isAuthenticated ? (
             <Link to="/account" onClick={() => setOpen(false)}>Profile</Link>
           ) : (
             <Link to="/auth" onClick={() => setOpen(false)}>Login</Link>
-          )}
+          )}*/}
         </nav>
       </div>
     </header>
