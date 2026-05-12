@@ -31,7 +31,7 @@ export default function CompanyHeader() {
       <div className="header-container">
         {/* Logo -> link to dashboard */}
         <Link to="/company/dashboard" className="logo">
-          Godayana.lk
+          JobPortal
         </Link>
 
         {/* Mobile menu toggle */}

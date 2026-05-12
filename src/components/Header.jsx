@@ -41,7 +41,7 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-container">
-        <Link to="/" className="logo">Godayana.lk</Link>
+        <Link to="/" className="logo">JobPortal</Link>
 
         <button className="menu-toggle" onClick={toggleMenu}>
           ☰
