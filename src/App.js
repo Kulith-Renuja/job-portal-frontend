@@ -5,12 +5,12 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Categories from './pages/Categories';
-// import Jobs from './pages/Jobs';
+import Jobs from './pages/Jobs';
 import Stories from './pages/Stories';
 import Courses from './pages/Courses';
-// import Account from './pages/Account';
+import Account from './pages/Account';
 import About from './pages/About';
-// import Auth from './pages/Auth';
+import Auth from './pages/Auth';
 import Migrations from './pages/Migrations';
 import Countries from './pages/Countries';
 
@@ -24,10 +24,9 @@ import JobDetails from './pages/DetailsPages/JobDetails';
 import CourseDetails from './pages/DetailsPages/CourseDetails';
 import MigrationDetails from './pages/DetailsPages/MigrationDetails';
 import StoryDetails from './pages/DetailsPages/StoryDetails';
-import CountryDetails from './pages/DetailsPages/CountryDetails'; 
+import CountryDetails from './pages/DetailsPages/CountryDetails';
 
 // Admin
-/*
 import AdminLayout from './admin/AdminLayout';
 import Dashboard from './admin/Dashboard';
 import ManageJobs from './admin/ManageJobs';
@@ -197,7 +196,6 @@ function AppLayout() {
         />
               
       </Routes>
-      
 
       {!hideLayout && <Footer />}
     </>
