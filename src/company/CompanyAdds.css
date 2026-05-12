@@ -1,0 +1,74 @@
+.company-dashboard {
+  padding: 30px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.top-section h1 {
+  color: #333;
+  font-size: 24px;
+  margin: 0;
+}
+
+.post-job-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-size: 16px;
+  padding: 12px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.post-job-btn:hover {
+  background-color: #0056b3;
+}
+
+.dashboard-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.dashboard-buttons button {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.dashboard-buttons button:hover {
+  background-color: #e6f0ff;
+}
+
+.dashboard-buttons .active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.dashboard-content {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 250px;
+}
+
+.content-box {
+  color: #444;
+  font-size: 16px;
+}

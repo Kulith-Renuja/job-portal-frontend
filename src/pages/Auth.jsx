@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import './Auth.css';
 import logo from '../assets/login-logo.png';
@@ -76,14 +77,29 @@ export default function Auth() {
       setLoading(false);
     }
   };
+=======
+import { useState } from "react";
+import logo from "../assets/login-logo.png";
+import UserLoginForm from "../components/auth/UserLoginForm";
+import UserRegisterForm from "../components/auth/UserRegisterForm";
+import CompanyLoginForm from "../company/components/CompanyLoginForm";
+import CompanyRegisterForm from "../company/components/CompanyRegisterForm";
+import "./Auth.css";
+
+export default function AuthPage() {
+  const [authType, setAuthType] = useState("user"); // "user" | "company"
+  const [isLogin, setIsLogin] = useState(true);
+>>>>>>> fix-temp
 
   return (
     <div className="auth-container">
+      {/* Left side */}
       <div className="auth-left">
         <img src={logo} alt="Job Portal" className="auth-logo" />
         <h2>Find Your Dream Job</h2>
         <p>
-          Join thousands of professionals who have discovered their perfect career opportunities through our platform.
+          Join thousands of professionals and companies using our platform to
+          connect and grow.
         </p>
         <div className="stats">
           <p><strong>50K+</strong> Active Jobs</p>
@@ -92,8 +108,10 @@ export default function Auth() {
         </div>
       </div>
 
+      {/* Right side */}
       <div className="auth-right">
         <h1 className="auth-h1">ජීවිතේම ගොඩයන්න</h1>
+<<<<<<< HEAD
         <div className="tabs">
           <button onClick={() => {setIsLogin(false); setIsCompanyRegistration(false);}} className={!isLogin && !isCompanyRegistration ? 'active' : ''}>Register</button>
           <button onClick={() => {setIsLogin(false); setIsCompanyRegistration(true);}} className={isCompanyRegistration ? 'active' : ''}>Company Register</button>
@@ -176,6 +194,50 @@ export default function Auth() {
             </button>
           </form>
         )}
+=======
+
+        {/* Tabs for user vs company */}
+        <div className="tabs_2">
+          <button
+            onClick={() => setAuthType("user")}
+            className={authType === "user" ? "active" : ""}
+          >
+            User
+          </button>
+          <button
+            onClick={() => setAuthType("company")}
+            className={authType === "company" ? "active" : ""}
+          >
+            Company
+          </button>
+        </div>
+
+        {/* Tabs for login vs register */}
+        <div className="tabs">
+          <button
+            onClick={() => setIsLogin(false)}
+            className={!isLogin ? "active" : ""}
+          >
+            Register
+          </button>
+          <button
+            onClick={() => setIsLogin(true)}
+            className={isLogin ? "active" : ""}
+          >
+            Login
+          </button>
+        </div>
+
+        {/* Render correct form */}
+        <div className="form-wrapper scroll-frame">
+          {authType === "user" && (
+            isLogin ? <UserLoginForm /> : <UserRegisterForm />
+          )}
+          {authType === "company" && (
+            isLogin ? <CompanyLoginForm /> : <CompanyRegisterForm />
+          )}
+        </div>
+>>>>>>> fix-temp
       </div>
     </div>
   );

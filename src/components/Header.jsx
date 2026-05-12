@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
+<<<<<<< HEAD
 import { useAuth } from '../context/AuthContext';
+=======
+import { useAuth } from '../context/AuthContext'; //
+>>>>>>> fix-temp
 import './Header.css';
 
 export default function Header() {
@@ -9,6 +13,7 @@ const { isAuthenticated, isCompany } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navRef = useRef(null); // for mobile menu
+  const { isAuthenticated } = useAuth(); // 
 
   const toggleMenu = () => setOpen(!open);
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
@@ -41,7 +46,7 @@ const { isAuthenticated, isCompany } = useAuth();
   return (
     <header className="header">
       <div className="header-container">
-        <Link to="/" className="logo">Godayana.lk</Link>
+        <Link to="/" className="logo">JobPortal</Link>
 
         <button className="menu-toggle" onClick={toggleMenu}>
           ☰
