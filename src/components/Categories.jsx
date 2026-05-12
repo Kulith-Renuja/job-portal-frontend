@@ -8,12 +8,6 @@ import Courses from '../assets/categories/Courses.png';
 
 const categories = [
   {
-    name: 'ගොඩයන Jobs',
-    image: Jobs,
-    path: '/jobs',
-    description: 'Find your dream career opportunities'
-  },
-  {
     name: 'ගොඩයන Migration',
     image: Migration,
     path: '/visa',

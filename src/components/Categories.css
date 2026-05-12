@@ -1,6 +1,6 @@
 .categories {
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #beeefe 0%, #ffffff 50%, #f0f9ff 100%);
+  background: linear-gradient(to left, #beeefe, #ffffff);
   position: relative;
   overflow: hidden;
 }
